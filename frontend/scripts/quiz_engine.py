@@ -1,4 +1,6 @@
 # mini_quest.py
+import os
+import json
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
@@ -9,144 +11,100 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.progressbar import MDProgressBar
 from kivymd.uix.screen import MDScreen
-import os
-import json
 
-
+from backend.tree import Tree
 
 class MiniQuestScreen(MDScreen):
-    scroll_view = ObjectProperty(None)
     content_box = ObjectProperty(None)
 
-    class MiniQuestScreen(MDScreen):
-        scroll_view = ObjectProperty(None)
-        content_box = ObjectProperty(None)
+    def __init__(self, subject="biology", topic_id="osmosis_101", **kwargs):
+        super().__init__(**kwargs)
+        self.subject = subject
+        self.topic_id = topic_id
+        self.quiz_index = 0
+        self.score = 0
 
-        def __init__(self, subject: str = "biology", topic_id: str = "osmosis_101", **kwargs):
-            super().__init__(**kwargs)
-            self.subject = subject
-            self.topic_id = topic_id
-            self.quiz_index = 0
-            self.score = 0
+        MAIN_DIR = os.getcwd()
+        self.json_path = os.path.join(MAIN_DIR, "data", "sample_quiz.json")
 
-            # Use main.py directory as base
-            MAIN_DIR = os.getcwd()  # this is the directory where main.py is run
-            self.json_path = os.path.join(MAIN_DIR, "data", "user", "sample_quiz.json")
+        # Load JSON
+        try:
+            with open(self.json_path, "r", encoding="utf-8") as f:
+                self.course_data = json.load(f)
+        except Exception as e:
+            raise FileNotFoundError(f"Cannot load {self.json_path}: {e}")
 
-            # Load course content JSON
-            try:
-                with open(self.json_path, "r", encoding="utf-8") as f:
-                    self.course_data = json.load(f)
-                    print("Loaded mini quest quiz json")
-            except Exception as e:
-                raise FileNotFoundError(f"Could not load {self.json_path}: {e}")
+        self.topic = self.get_topic(subject, topic_id)
+        self.total = len(self.topic.get("quiz", []))
 
-            # Now retrieve topic dynamically
-            self.topic = self.get_topic(subject, topic_id)
-            self.total = len(self.topic.get("quiz", []))
+    def on_enter(self, *args):
+        app = MDApp.get_running_app()
+        self.current_user = app.current_user   
+        self.user_tree = Tree(self.current_user)
+        
+        self.build_question()
 
-            # Build the screen
-            self.build_screen()
-
-
-    def get_topic(self, subject: str, topic_id: str):
-        """Retrieve topic data from JSON using topic_id."""
+    def get_topic(self, subject, topic_id):
         subject_data = self.course_data.get("subjects", {}).get(subject, {})
         for topic in subject_data.get("topics", []):
             if topic.get("id") == topic_id:
-                # Normalize quiz key if necessary
                 if "quiz" not in topic and "questions" in topic:
                     topic["quiz"] = topic["questions"]
                 return topic
-        raise ValueError(f"Topic '{topic_id}' not found for subject '{subject}'")
+        raise ValueError(f"Topic {topic_id} not found in {subject}")
 
-    def build_screen(self):
-        self.clear_widgets()
+    def build_question(self):
+        """Update content_box for current question"""
+        self.content_box.clear_widgets()
 
-        # Scrollable area
-        self.scroll_view = ScrollView(size_hint=(1, 1))
-        self.content_box = BoxLayout(
-            orientation="vertical",
-            size_hint_y=None,
-            spacing=10,
-            padding=10
-        )
-        self.content_box.bind(minimum_height=self.content_box.setter("height"))
-        self.scroll_view.add_widget(self.content_box)
-        self.add_widget(self.scroll_view)
-
-        # Mini lesson / context
+        # Add mini lesson/context
         for line in self.topic.get("content", []):
-            lbl = MDLabel(
-                text=line,
-                size_hint_y=None,
-                adaptive_height=True,
-                font_name="C:/Windows/Fonts/seguiemj.ttf",  # Emoji support
-            )
+            lbl = MDLabel(text=line, adaptive_height=True, font_name="C:/Windows/Fonts/seguiemj.ttf")
             self.content_box.add_widget(lbl)
 
-        # Diagram if available
+        # Diagram
         diagram_file = self.topic.get("diagram")
-        diagram_path = os.path.join(self.json_path, "assets", diagram_file) if diagram_file else None
-        if diagram_path and os.path.exists(diagram_path):
-            img = Image(
-                source=diagram_path,
-                size_hint_y=None,
-                height=250,
-                allow_stretch=True,
-                keep_ratio=True
-            )
-            self.content_box.add_widget(img)
+        if diagram_file:
+            diagram_path = os.path.join(os.path.dirname(self.json_path), "assets", diagram_file)
+            if os.path.exists(diagram_path):
+                img = Image(source=diagram_path, size_hint_y=None, height=250, allow_stretch=True, keep_ratio=True)
+                self.content_box.add_widget(img)
 
-        # Show quiz question
+        # Check if quiz is finished
         if self.quiz_index >= self.total:
+            bonus_xp = 25
+            self.user_tree.add_xp(bonus_xp)
+
             self.content_box.add_widget(MDLabel(
-                text=f"🎉 Mini Quest Completed! Score: {self.score}/{self.total}",
-                size_hint_y=None,
+                text=f"🎉 Mini Quest Completed!\nScore: {self.score}/{self.total}\n🌱 +{bonus_xp} XP Bonus!",
                 adaptive_height=True,
                 font_name="C:/Windows/Fonts/seguiemj.ttf"
             ))
             return
 
-        self.current_question = self.topic["quiz"][self.quiz_index]
 
+        # Current question
+        self.current_question = self.topic["quiz"][self.quiz_index]
         question_lbl = MDLabel(
-            text=f"Q{self.quiz_index+1}: {self.current_question['question']}",
-            size_hint_y=None,
+            text=f"Q{self.quiz_index + 1}: {self.current_question['question']}",
             adaptive_height=True,
             font_name="C:/Windows/Fonts/seguiemj.ttf"
         )
         self.content_box.add_widget(question_lbl)
 
         # Option buttons
-        self.option_buttons = []
         for option in self.current_question["options"]:
-            btn = MDRaisedButton(
-                text=option,
-                size_hint=(1, None),
-                height=50
-            )
+            btn = MDRaisedButton(text=option, size_hint=(1, None), height=50)
             btn.bind(on_press=self.check_answer)
-            self.option_buttons.append(btn)
             self.content_box.add_widget(btn)
 
         # Hint button
-        hint_btn = MDRaisedButton(
-            text="💡 Hint",
-            size_hint=(1, None),
-            height=50
-        )
+        hint_btn = MDRaisedButton(text="💡 Hint", size_hint=(1, None), height=50, font_name="C:/Windows/Fonts/seguiemj.ttf")
         hint_btn.bind(on_press=self.show_hint)
         self.content_box.add_widget(hint_btn)
 
         # Progress bar
-        self.progress = MDProgressBar(
-            max=self.total,
-            value=self.quiz_index,
-            size_hint_y=None,
-            height=20
-        )
-        self.content_box.add_widget(self.progress)
+        self.content_box.add_widget(MDProgressBar(max=self.total, value=self.quiz_index, height=20))
 
     def show_hint(self, instance):
         hint = self.current_question.get("hint", "No hint available.")
@@ -161,11 +119,13 @@ class MiniQuestScreen(MDScreen):
         selected = instance.text
         correct = self.current_question["answer"]
 
+        feedback = "Correct! " if selected == correct else f"Wrong!. Correct: {correct}"
         if selected == correct:
             self.score += 1
-            feedback = "Correct! ✅"
-        else:
-            feedback = f"Wrong ❌. Correct: {correct}"
+
+            points_for_correct = 10  # same XP rule
+            self.user_tree.add_xp(points_for_correct)
+            print(f"[MiniQuest] Added {points_for_correct} XP to user {self.current_user}")
 
         popup = Popup(
             title="Feedback",
@@ -174,22 +134,16 @@ class MiniQuestScreen(MDScreen):
         )
         popup.open()
 
-        # Next question
         self.quiz_index += 1
-        self.build_screen()
+        self.build_question()
 
     def go_back(self):
-        """Go back to home screen (requires ScreenManager)."""
         if self.manager:
-            self.manager.current = "home" 
+            self.manager.current = "home"
+
 
 class MiniQuestApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Blue"
-        # Example: load the osmosis_101 topic
         return MiniQuestScreen(subject="biology", topic_id="osmosis_101")
-
-
-if __name__ == "__main__":
-    MiniQuestApp().run()
