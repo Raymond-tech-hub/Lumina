@@ -1,0 +1,40 @@
+#:kivy 2.1.0
+#:import MDCard kivymd.uix.card.MDCard
+#:import MDRaisedButton kivymd.uix.button.MDRaisedButton
+#:import ScrollView kivy.uix.scrollview.ScrollView
+#:import BoxLayout kivy.uix.boxlayout
+#:import Label kivymd.uix.label.MDLabel
+
+<DailyHeader@MDCard>:
+    size_hint: 0.95, None
+    height: dp(120)
+    pos_hint: {"top": 0.95}
+    padding: dp(10)
+    radius: [20,]
+    md_bg_color: 1, 1, 1, 0.15  # Glass effect
+    elevation: 8
+
+FloatLayout:
+    # Top header pinned
+    DailyHeader:
+        BoxLayout:
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(10)
+
+            MDLabel:
+                text: "Daily Quiz"
+                halign: "center"
+                theme_text_color: "Primary"
+                font_style: "H5"
+
+            ScrollView:
+                do_scroll_x: True
+                do_scroll_y: False
+
+                BoxLayout:
+                    id: subjects_box
+                    orientation: "horizontal"
+                    size_hint_x: None
+                    width: self.minimum_width
+                    spacing: dp(10)

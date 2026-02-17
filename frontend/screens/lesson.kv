@@ -1,0 +1,91 @@
+<SubjectCard@MDCard>:
+    orientation: "vertical"
+    size_hint_y: None
+    height: dp(130)
+    padding: dp(15)
+    spacing: dp(10)
+    radius: [15]
+    elevation: 6
+    md_bg_color: 1, 1, 1, 0.85  # semi-transparent white
+
+    MDLabel:
+        id: title
+        text: ""
+        font_size: "18sp"
+        bold: True
+        font_name: "C:/Windows/Fonts/seguiemj.ttf"
+        theme_text_color: "Custom"
+        text_color: 0.1, 0.2, 0.3, 1
+        halign: "left"
+
+    MDLabel:
+        id: description
+        text: ""
+        font_size: "14sp"
+        halign: "left"
+
+    MDProgressBar:
+        id: progress
+        value: 0
+        color: 0.1, 0.6, 0.9, 1
+
+    MDFlatButton:
+        id: select_btn
+        text: "Select ▶"
+        font_name: "C:/Windows/Fonts/seguiemj.ttf"
+        size_hint_y: None
+        height: dp(36)
+
+
+<LessonScreen>:
+    name: 'lesson'
+
+    Image:
+        source: app.subject_wallpaper
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 1
+        pos_hint: {"x": 0, "y": 0}
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # ================= Header =================
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: 10
+            md_bg_color: 0.1, 0.6, 0.9, 1
+            MDLabel:
+                text: "Lesson"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 0.95, 1  # soft yellow-white
+                halign: "center"
+                font_style: "H6"
+
+        # ================= Scrollable Subjects =================
+        ScrollView:
+            MDBoxLayout:
+                id: lesson_content
+                orientation: "vertical"
+                padding: 20
+                spacing: 20
+                size_hint_y: None
+                height: self.minimum_height
+
+        # ================= Footer =================
+        MDBoxLayout:
+            size_hint_y: None
+            height: "50dp"
+            padding: 10
+            spacing: 10
+            MDFlatButton:
+                text: "Back ⬅"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                text_color: 1, 1, 0.95, 1
+                on_release: app.root.current = "home"
+            MDFlatButton:
+                text: "Settings ⚙️"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                text_color: 1, 1, 0.95, 1

@@ -1,0 +1,43 @@
+{
+    "Assets": {
+        "loading_image": "frontend/assets/loading/loading_image.jpg",
+        "loading_animation": "frontend/assets/loading/loading_animation.json",
+
+        "app_logo": "frontend/assets/images/logo/app_logo1.png",
+        "app_logo2": "frontend/assets/images/logo/app_logo.png",
+        "app_icon": "frontend/assets/images/icons/app_icon.png",
+
+        "inbox_icon": "frontend/assets/images/icons/chat.png",
+        "profile_icon": "frontend/assets/images/icons/profile.png",
+        "notification_icon": "frontend/assets/images/icons/notification.png",
+        "tutor_icon": "frontend/assets/images/icons/tutor.png",
+        "home_icon": "frontend/assets/images/icons/home.png",
+        "task_icon": "frontend/assets/images/icons/task.png", 
+        "leaderboard_icon": "frontend/assets/images/icons/leaderboard.png",
+        "menu_icon": "frontend/assets/images/icons/menu.png",
+        "quiz_icon": "frontend/assets/images/icons/quiz.png",
+        "tree_image": "frontend/assets/images/icons/tree_image.jpeg",
+        "tutor_logo": "frontend/assets/images/icons/tutor_logo.png",
+
+        "login_wallpaper": "frontend/assets/images/wallpapers/login_wallpaper.jpg",
+        "subject_wallpaper": "frontend/assets/images/wallpapers/subject_wallpaper.jpeg",
+        "biology_wallpaper": "frontend/assets/images/wallpapers/biology_wallpaper.jpeg"
+
+    },
+
+    "AppConfig": {
+        "Name": "Lumina",
+        "Version": "v1.0",
+        "Theme": "Dark"
+    },
+
+    "Data": {
+        "path": "data"
+    },
+
+    "Sounds": {
+        "theme1": "frontend/assets/sounds/theme1.mp3",
+        "theme2": "frontend/assets/sounds/theme2.mp3"
+    }
+
+}

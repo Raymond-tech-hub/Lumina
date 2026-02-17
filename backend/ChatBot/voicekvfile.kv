@@ -1,0 +1,22 @@
+<VoiceChatScreen>:
+    name: "voicechat"
+    BoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(20)
+
+        Widget:
+            size_hint: None, None
+            size: root.circle_size, root.circle_size
+            pos_hint: {"center_x": 0.5}
+            canvas:
+                Color:
+                    rgba: 0.2, 0.6, 1, 1  # blue color
+                Ellipse:
+                    size: self.size
+                    pos: self.pos
+
+        MDRaisedButton:
+            text: "Say Hello"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.say_hello()

@@ -1,0 +1,138 @@
+<ProfileScreen>:
+    name: 'profile'
+    MDBoxLayout:
+        orientation: "vertical"
+        # ================= HEADER =================
+        FloatLayout:
+            MDBoxLayout:
+                orientation: "horizontal"    # horizontal elements
+                size_hint_y: None            # fixed height
+                height: dp(80)               # header height
+                padding: dp(10)
+                spacing: dp(20)              # space between items
+                pos_hint: {"top": 1}
+                md_bg_color: app.theme_cls.primary_dark
+
+                # Logo
+                FitImage:
+                    id: logo
+                    source: app.app_logo2
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+                    radius: [dp(25)]   # half of width/height → makes it fully round
+
+                # App Name
+                MDLabel:
+                    text: "Lumina"
+                    font_size: dp(36)
+                    bold: True
+                    color: 0.5, 0.93, 1, 1
+                    valign: "middle"
+
+                # Inbox icon
+                ImageButton:
+                    source: app.inbox_icon
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+
+                # Bell icon
+                ImageButton:
+                    source: app.notification_icon
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+
+        # ================= MIDDLE_SECTOR =================
+        MDFloatLayout:
+
+            MDCard:
+                size_hint: None, None
+                size: "340dp", "580dp"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                padding: "40dp", "60dp", "40dp", "40dp"   # top, right, bottom, left
+                radius: [32]
+                md_bg_color: 1, 1, 1, 0.09
+
+                # Glass border + shadow
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 0.18
+                    Line:
+                        rounded_rectangle: self.x+2, self.y+2, self.width-4, self.height-4, 32
+                        width: 1.2
+                    Color:
+                        rgba: 0, 0, 0, 0.25
+                    RoundedRectangle:
+                        pos: self.x + dp(8), self.y + dp(8)
+                        size: self.width - dp(16), self.height - dp(16)
+                        radius: [28]
+
+                # Content inside the card
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "28dp"
+                    adaptive_height: True
+                    size_hint_y: None
+                    height: self.minimum_height
+                    width: self.parent.width  # <-- fill card horizontally
+                    padding: 0
+                    pos_hint: {"center_x": 0.5}  # <-- centers content horizontally
+
+                    # Graph centered
+                    AnchorLayout:
+                        size_hint_y: None
+                        height: "130dp"
+                        anchor_x: "center"
+                        anchor_y: "center"
+
+                        FitImage:
+                            source: app.current_graph
+                            size_hint: None, None
+                            size: "300dp", "300dp"
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            allow_stretch: True
+
+
+
+        # ============ FOOTER ===========
+        MDBoxLayout:
+            id: footer
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(80)
+            padding: [dp(60), dp(10), dp(20), dp(10)] # left, top, right, bottom
+            spacing: dp(100)
+            md_bg_color: 0, 0, 0, 0.2   # optional translucent background
+            adaptive_width: True
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_dark
+
+
+            ImageButton:
+                source: app.home_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_home()  
+
+            ImageButton:
+                source: app.task_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_tasks()  
+
+            ImageButton:
+                source: app.leaderboard_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_leaderboard()   
+
+            ImageButton:
+                source: app.quiz_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_quiz()
+
+            ImageButton:
+                source: app.profile_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_profile() 

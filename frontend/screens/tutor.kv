@@ -1,0 +1,81 @@
+#:import dp kivy.metrics.dp
+#:import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDFlatButton kivymd.uix.button.MDFlatButton
+
+<ChatBotScreen>:
+    name: "chatbot"
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # ================= HEADER =================
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(80)
+            padding: dp(10)
+            spacing: dp(5)
+
+            # 🔙 Built-in KivyMD Back Icon
+            MDIconButton:
+                icon: "arrow-left"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.go_back()
+
+            MDLabel:
+                text: "Lumina Assistant"
+                font_style: "H5"
+                halign: "left"
+
+            # 🎓 Logo
+            FitImage:
+                id: tutor_logo
+                source: app.tutor_logo
+                size_hint: None, None
+                size: dp(50), dp(50)
+                radius: [self.width/2]
+
+            # Spacer pushes dots to the far right
+            Widget:
+
+            # ⋮ Menu icon
+            MDIconButton:
+                icon: "dots-vertical"
+                theme_text_color: "Custom"
+                text_color: 1, 1, 1, 1
+                on_release: root.open_settings()
+
+
+        # ================= CHAT AREA =================
+        ScrollView:
+            id: chat_scroll
+            MDBoxLayout:
+                id: chat_container
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(10)
+                spacing: dp(10)
+
+        # ================= RECOMMENDATIONS =================
+        MDBoxLayout:
+            id: recommendations
+            size_hint_y: None
+            height: dp(50)
+            spacing: dp(5)
+
+        # ================= INPUT =================
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            padding: dp(5)
+            spacing: dp(5)
+
+            MDTextField:
+                id: user_input
+                hint_text: "Type your message..."
+                mode: "rectangle"
+                on_text_validate: root.send_message()
+
+            MDFlatButton:
+                text: "Send"
+                on_release: root.send_message()

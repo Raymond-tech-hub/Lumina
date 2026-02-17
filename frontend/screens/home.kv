@@ -1,0 +1,161 @@
+#:import dp kivy.metrics.dp
+
+<HomeScreen>:
+    name: 'home'
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # ================= HEADER =================
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: 0.15  # 10% of screen height
+            padding: dp(10)
+            spacing: dp(2)
+            md_bg_color: app.theme_cls.primary_dark
+
+            FitImage:
+                id: logo
+                source: app.app_logo2
+                size_hint: 0.08, 1  # 8% width, full header height
+                radius: [self.width/2]  # fully round
+
+            MDLabel:
+                text: "Lumina"
+                font_size: sp(24)
+                bold: True
+                color: 0.5, 0.93, 1, 1
+                valign: "middle"
+                size_hint_x: 0.4
+
+            ImageButton:
+                source: app.inbox_icon
+                size_hint: 0.08, 1
+
+            ImageButton:
+                source: app.notification_icon
+                size_hint: 0.08, 1
+
+        # ================= MIDDLE SECTOR =================
+        FloatLayout:
+            id: middle_sector
+            size_hint_y: 0.75  # 75% of screen height
+
+            # Menu icon (top-left)
+            ImageButton:
+                source: app.menu_icon
+                size_hint: 0.08, 0.12  # relative to middle sector
+                pos_hint: {"x":0.02, "top":0.98}
+                on_release: root.toggle_menu_panel()
+
+            # Tree image centered
+            FitImage:
+                source: app.tree_image
+                size_hint: 0.5, 0.7 # 50% width, 60% height of middle sector
+                pos_hint: {"center_x":0.5, "y":0.1}
+
+            # Coin + XP info horizontally aligned near menu
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint: 0.35, 0.1  # relative width & height
+                spacing: 0.05
+                pos_hint: {"x":0.12, "top":0.95}
+
+                MDLabel:
+                    text: "Coins: 120"
+                    font_style: "H6"
+                    color: 1, 0.9, 0, 1
+                    halign: "left"
+
+                MDLabel:
+                    text: "XP: 340"
+                    font_style: "H6"
+                    color: 0.5, 1, 0.5, 1
+                    halign: "left"
+
+            # Tutor icon (bottom-right)
+            ImageButton:
+                source: app.tutor_icon
+                size_hint: 0.08, 0.12
+                pos_hint: {"right":0.98, "y":0.05}
+                on_release: root.go_tutor()
+
+            # Dim background behind menu panel
+            MDBoxLayout:
+                id: slider_bg
+                size_hint: 0.7, 1
+                pos_hint: {"x": 0}
+                md_bg_color: 0, 0, 0, 0.4
+                opacity: 0
+                disabled: self.opacity == 0
+                on_touch_down:
+                    if self.opacity == 1: root.hide_menu_panel()
+
+            # Side menu panel (left-to-right, translucent gray)
+            MDBoxLayout:
+                id: menu_slider_panel
+                orientation: "vertical"
+                size_hint: 0.7, None    # 70% of width
+                height: dp(300)
+                pos_hint: {"x": 0, "y": 0.05}
+                opacity: 0
+                disabled: True
+                spacing: dp(12)
+                padding: dp(15)
+                md_bg_color: 0.2, 0.2, 0.2, 0.9  # grayish translucent
+                radius: [12,]
+
+                MDRaisedButton:
+                    text: "Lessons"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.go_lesson()
+
+                MDRaisedButton:
+                    text: "Settings"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: print("Settings clicked")
+
+                MDRaisedButton:
+                    text: "Help"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: print("Help clicked")
+
+                MDRaisedButton:
+                    text: "About"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: print("About clicked")
+
+
+        # ================= FOOTER =================
+        MDBoxLayout:
+            id: footer
+            orientation: "horizontal"
+            size_hint_y: 0.15  # 15% of screen height
+            padding: [dp(20), dp(10), dp(20), dp(10)]
+            spacing: dp(20)
+            md_bg_color: app.theme_cls.primary_dark
+
+            ImageButton:
+                source: app.home_icon
+                size_hint: 0.12, 1
+                on_release: root.go_home()  
+
+            ImageButton:
+                source: app.task_icon
+                size_hint: 0.12, 1
+                on_release: root.go_tasks()  
+
+            ImageButton:
+                source: app.leaderboard_icon
+                size_hint: 0.12, 1
+                on_release: root.go_leaderboard()  
+
+            ImageButton:
+                source: app.quiz_icon
+                size_hint: 0.12, 1
+                on_release: root.go_quiz()
+
+            ImageButton:
+                source: app.profile_icon
+                size_hint: 0.12, 1
+                on_release: root.go_profile()

@@ -1,0 +1,101 @@
+{
+  "subjects": {
+    "biology": {
+      "topics": [ 
+        {
+          "id": "osmosis_101",
+          "title": "Osmosis",
+          "content": [
+            "Osmosis is the diffusion of water molecules through a partially (selectively) permeable membrane.",
+            "Water moves from a region of higher water concentration (dilute solution / low solute) to a region of lower water concentration (concentrated solution / high solute).",
+            "Osmosis is a passive process, no energy is required.",
+            "Key terms:",
+            "- Hypotonic: solution with lower solute concentration than the cell → water enters cell",
+            "- Hypertonic: solution with higher solute concentration than the cell → water leaves cell",
+            "- Isotonic: equal solute concentration → no net water movement",
+            "In plant cells: osmosis creates turgor pressure (important for support). In animal cells: can cause swelling or shrinking."
+          ],
+          "diagram": "osmosis_types.png", 
+            {
+              "question": "What is osmosis?",
+              "options": [
+                "Movement of any particles from high to low concentration",
+                "Movement of water across a partially permeable membrane from dilute to concentrated solution",
+                "Active transport of solutes using energy",
+                "Movement of gases across the cell membrane"
+              ],
+              "answer": "Movement of water across a partially permeable membrane from dilute to concentrated solution",
+              "hint": "Osmosis is special because it's only about WATER and uses a semi-permeable membrane."
+            },
+            {
+              "question": "In which direction does water move during osmosis?",
+              "options": [
+                "From high solute concentration to low solute concentration",
+                "From low water concentration to high water concentration",
+                "From high water concentration (low solute) to low water concentration (high solute)",
+                "Randomly in both directions equally"
+              ],
+              "answer": "From high water concentration (low solute) to low water concentration (high solute)",
+              "hint": "Water always moves to where there are more solutes (to dilute them)."
+            },
+            {
+              "question": "A solution with lower solute concentration than inside a cell is called:",
+              "options": [
+                "Hypertonic",
+                "Isotonic",
+                "Hypotonic",
+                "Equilibrium"
+              ],
+              "answer": "Hypotonic",
+              "hint": "Hypo = less (solute outside), so water enters the cell → cell swells."
+            },
+            {
+              "question": "What happens to an animal cell placed in a hypertonic solution?",
+              "options": [
+                "It swells and may burst",
+                "It stays the same size",
+                "It shrinks (crenates)",
+                "It divides into two cells"
+              ],
+              "answer": "It shrinks (crenates)",
+              "hint": "Water leaves the cell to balance the higher solute outside → cell loses water and shrinks."
+            },
+            {
+              "question": "In an isotonic solution, what is the net movement of water?",
+              "options": [
+                "Large movement into the cell",
+                "Large movement out of the cell",
+                "No net movement",
+                "Only solute moves, not water"
+              ],
+              "answer": "No net movement",
+              "hint": "Equal solute concentration inside and outside means water moves equally both ways."
+            },
+            {
+              "question": "Why do plant cells become turgid?",
+              "options": [
+                "They are in a hypertonic solution",
+                "Water enters by osmosis in a hypotonic solution, pressing against the cell wall",
+                "They lose water in an isotonic solution",
+                "Active transport pumps water out"
+              ],
+              "answer": "Water enters by osmosis in a hypotonic solution, pressing against the cell wall",
+              "hint": "Turgid = firm/swollen – good for plant support (e.g. crisp leaves)."
+            },
+            {
+              "question": "Osmosis requires:",
+              "options": [
+                "Energy from ATP",
+                "A freely permeable membrane",
+                "A selectively permeable membrane and a concentration gradient of water",
+                "Carrier proteins for water"
+              ],
+              "answer": "A selectively permeable membrane and a concentration gradient of water",
+              "hint": "It's passive diffusion, just needs the right membrane and difference in water concentration."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

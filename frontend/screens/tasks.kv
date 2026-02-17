@@ -1,0 +1,148 @@
+#:import dp kivy.metrics.dp
+
+<TasksScreen>:
+    name: 'tasks'
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # ================= HEADER =================
+        FloatLayout:
+            MDBoxLayout:
+                orientation: "horizontal"    # horizontal elements
+                size_hint_y: None            # fixed height
+                height: dp(80)               # header height
+                padding: dp(10)
+                spacing: dp(20)              # space between items
+                pos_hint: {"top": 1}
+                md_bg_color: app.theme_cls.primary_dark
+
+                # Logo
+                FitImage:
+                    id: logo
+                    source: app.app_logo2
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+                    radius: [dp(25)]   # half of width/height → makes it fully round
+
+                # App Name
+                MDLabel:
+                    text: "Lumina"
+                    font_size: dp(36)
+                    bold: True
+                    color: 0.5, 0.93, 1, 1
+                    valign: "middle"
+
+        # ================= SCROLLABLE BODY =================
+        ScrollView:
+            do_scroll_x: False
+            size_hint_y: 1
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                size_hint_y: None
+                height: dp(12)
+            
+                # ================= DAILY TASKS =================
+                MDBoxLayout:
+                    id: daily_tasks
+                    orientation: "vertical"
+                    padding: dp(20)
+                    size_hint_y: None
+                    height: dp(250)
+
+
+                    MDLabel:
+                        text: "Daily Tasks"
+                        font_style: "H6"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    ScrollView:
+                        do_scroll_x: False
+
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            adaptive_height: True
+                            spacing: dp(1)
+
+                            # ---------- Mathematics ----------
+                            MDCard:
+                                size_hint_y: None
+                                height: dp(200)  # card height
+                                radius: dp(12)
+                                elevation: 3
+                                padding: dp(12)
+
+                                MDBoxLayout:
+                                    orientation: "vertical"
+                                    adaptive_height: True
+                                    spacing: dp(8)
+
+                                    MDLabel:
+                                        text: "Mathematics"
+                                        font_style: "H6"
+                                        theme_text_color: "Primary"
+                                        size_hint_y: None
+                                        height: self.texture_size[1]
+
+                                    MDFillRoundFlatButton:
+                                        text: "Algebra - Linear Equations"
+                                        size_hint_y: None
+                                        #height: self.texture_size[1]
+
+                                    MDFillRoundFlatButton:
+                                        text: "Algebra - Quadratic Equations"
+                                        size_hint_y: None
+                                        #height: self.texture_size[1]
+
+                                    MDFillRoundFlatButton:
+                                        text: "Geometry - Triangles"
+                                        size_hint_y: None
+                                        #height: self.texture_size[1]                    
+
+        # ================= FOOTER =================
+        MDBoxLayout:
+            id: footer
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(80)
+            padding: [dp(60), dp(10), dp(20), dp(10)] # left, top, right, bottom
+            spacing: dp(100)
+            md_bg_color: 0, 0, 0, 0.2   # optional translucent background
+            adaptive_width: True
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_dark
+
+
+            ImageButton:
+                source: app.home_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_home()  
+
+            ImageButton:
+                source: app.task_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_tasks()  
+
+            ImageButton:
+                source: app.leaderboard_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_leaderboard()  
+
+            ImageButton:
+                source: app.quiz_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_quiz()
+
+            ImageButton:
+                source: app.profile_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_profile() 
+
+                                                

@@ -1,0 +1,11 @@
+{
+    "ID": 1,
+    "Name": "Diamond Ebenyo",
+    "Subjects": ["Math", "English", "Kiswahili", "Computer"],
+    "Exams": 4,
+    "Math": [72, 64, 82, 94],
+    "English": [64, 72, 68, 82],
+    "Kiswahili": [58, 62, 55, 68],
+    "Computer": [92, 98, 100, 94],
+    "Status": "Excellent"
+}

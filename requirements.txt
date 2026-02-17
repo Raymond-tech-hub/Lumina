@@ -1,0 +1,18 @@
+#python version
+Name: python
+version: 3.11.9
+
+# Kivymd version specification
+Name: kivymd
+Version: 1.2.0
+
+# SBERT model version specification
+Name: SBERT
+Version: all-MiniLM-L6-v2
+
+# LLaMA model version specification
+Name: LLaMA, LLaMA
+version: 
+
+
+

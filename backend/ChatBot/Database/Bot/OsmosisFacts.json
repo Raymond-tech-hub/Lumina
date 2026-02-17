@@ -1,0 +1,22 @@
+[{
+        "definition": {
+            "queries": ["what is osmosis", 
+                        "define osmosis",
+                        "explain osmosis"],
+            "positive": "Osmosis is the movement of water across a semipermeable membrane."
+        },
+    
+        "definition_membrane": {
+            "queries": ["what is a membrane", "define membrane"],
+            "positive": "A semi-permeable membrane allows water molecules to pass through but restricts other molecules."
+        },
+        
+        
+        "importance_plants": {
+            "queries": ["how does osmosis help plants",
+                        "why is osmosis important for plant support",
+                        "explain how osmosis makes plant cells firm",
+                        "importance of osmosis to plants"],
+            "positive": "Osmosis makes plant cells firm and provides support to the plant."
+                                        }
+}]
