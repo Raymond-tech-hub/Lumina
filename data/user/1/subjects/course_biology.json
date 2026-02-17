@@ -13,40 +13,36 @@
       "id": "osmosis",
       "name": "🌊 Mission 1: Save the Dying Plant (Osmosis)",
       "short_description": "Movement of water across cell membranes",
-      "content": [
-        {
-          "subtopic": "HOOK",
-          "text": "🎯 Why do your fingers wrinkle in water? Osmosis is responsible!"
-        },
-        {
-          "subtopic": "STORY",
-          "text": "📖 Imagine water molecules as students moving from a crowded room to an empty one."
-        },
-        {
-          "subtopic": "CORE IDEA",
-          "text": "🧠 Osmosis is the movement of water across a semi-permeable membrane."
-        },
-        {
-          "subtopic": "MEMORY CODE",
-          "text": "⚡ H2L → Water moves from High to Low concentration."
-        },
-        {
-          "subtopic": "IMPORTANCE",
-          "text": "🌿 Keeps plant cells turgid and animals balanced."
-        },
-        {
-          "subtopic": "REAL LIFE",
-          "text": "🧩 When a plant is placed in salty water, it shrinks because water leaves the cell."
-        },
-        {
-          "subtopic": "CHALLENGE",
-          "text": "🎮 Predict what happens to a plant in pure water before moving on."
-        },
-        {
-          "subtopic": "Diagram",
-          "text": "🖼 [osmosis.png]"
-        }
-      ],
+      "content": [         
+      {
+        "subtopic": "QUESTION",
+        "text": "🎯 Why do your fingers wrinkle in water?\n💧 Osmosis is responsible!\n🌊 Water moves in and out of your skin cells causing them to shrink and wrinkle.\n🤔 It's your body's clever way of improving grip underwater!"
+      },
+      {
+        "subtopic": "STORY",
+        "text": "📖 Imagine water molecules as students 🧑‍🎓🧑‍🎓 moving from a crowded room 🏫 to an empty one 🏠.\n💦 They spread out naturally, just like water does across a semi-permeable membrane.\n😂 Funny right? Your skin cells do the same thing!"
+      },
+      {
+        "subtopic": "CORE IDEA",
+        "text": "🧠 Osmosis is the movement of water 💧 across a semi-permeable membrane 🛡️.\n🌿 It happens in plants to keep cells turgid 🌱 and in animals to maintain balance ⚖️.\n🔬 It's a basic but super important biological process!"
+      },
+      {
+        "subtopic": "MEMORY CODE",
+        "text": "⚡ H2L → Water moves from High 🌊 to Low 💧 concentration.\n💡 Remember: Think of a slide 🛝, water always goes downhill!\n🎯 Quick trick: High → Low, Osmosis flow!"
+      },
+      {
+        "subtopic": "IMPORTANCE",
+        "text": "🌿 Keeps plant cells turgid 💪 and animals balanced ⚖️.\n💧 Without osmosis, plants wilt 🌱 and our bodies get dehydrated 😰.\n✨ It's nature's way of maintaining harmony!"
+      },
+      {
+        "subtopic": "REAL LIFE",
+        "text": "🧩 When a plant 🌿 is placed in salty water 🧂, it shrinks 😮 because water leaves the cell 🚪💨.\n💦 Conversely, in pure water 💧 it swells 💚. Try it as a fun experiment!"
+      },
+      {
+        "subtopic": "CHALLENGE",
+        "text": "🎮 Predict what happens to a plant 🌱 in pure water 💧 before moving on.\n🕵️‍♂️ Think like a scientist 🔬: where will the water go?\n🤔 Hint: High → Low!"
+      }
+    ],
       "diagram": "osmosis.png"
     },
     {

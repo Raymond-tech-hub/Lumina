@@ -14,6 +14,9 @@ from kivymd.uix.screen import MDScreen
 from kivy.clock import Clock
 from kivy.animation import Animation
 
+from backend.tree import Tree
+
+
 class QuizScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -36,6 +39,10 @@ class QuizScreen(MDScreen):
         self.questions = self.get_topic_quiz(subject, topic_index)
         self.quiz_index = 0
         self.score = 0
+
+        app = MDApp.get_running_app()
+        self.current_user = app.current_user
+        self.user_tree = Tree(self.current_user)
 
         # Display first question
         self.display_question()
@@ -146,6 +153,11 @@ class QuizScreen(MDScreen):
 
         if selected == correct:
             self.score += 1
+
+            # Add XP to user's tree
+            points_for_correct = 10  # 10 XP per correct answer
+            self.user_tree.add_xp(points_for_correct)
+            print(f"Added {points_for_correct} XP to user {self.current_user}!")
 
         self.quiz_index += 1
         self.display_question()

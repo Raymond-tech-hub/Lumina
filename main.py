@@ -46,6 +46,7 @@ from frontend.scripts.chatbot_screen import ChatBotScreen
 from frontend.scripts.lesson_screen import LessonScreen
 from frontend.scripts.lesson_screen import TopicRoadmapScreen
 from frontend.scripts.lesson_progress_screen import LessonProgressScreen
+from frontend.scripts.quiz_engine import MiniQuestScreen
 
 from kivy.core.audio import SoundLoader
 from time import sleep
@@ -217,6 +218,7 @@ class LuminaApp(MDApp):
         sm.add_widget(LessonScreen(name="lesson"))
         sm.add_widget(TopicRoadmapScreen(name='topic_roadmap'))
         sm.add_widget(LessonProgressScreen(name="lesson_progress"))
+        sm.add_widget(MiniQuestScreen(name="miniquest"))
 
         sm.current = "loading"
 

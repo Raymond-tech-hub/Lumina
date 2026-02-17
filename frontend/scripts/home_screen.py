@@ -14,7 +14,7 @@ class HomeScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.user_tree = None
-        
+
     def on_enter(self, *args):
         print("entered home screen")
         app = MDApp.get_running_app()

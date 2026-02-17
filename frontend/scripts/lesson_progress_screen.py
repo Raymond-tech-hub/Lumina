@@ -143,6 +143,6 @@ class LessonProgressScreen(MDScreen):
         # Mark final progress
         self.save_progress()
 
-        self.manager.current = "home"
+        self.manager.current = "miniquest"
         '''quiz_screen = self.manager.get_screen("quiz")
         quiz_screen.load_quiz(self.subject_id, self.topic_id)'''

@@ -25,6 +25,7 @@ kv_files = [
     "frontend/screens/tutor.kv",
     "frontend/screens/lesson.kv",
     "frontend/screens/lesson_progress.kv",
+    "frontend/screens/mini_quest.kv",
     "frontend/screens/timetable.kv"
 ]
 

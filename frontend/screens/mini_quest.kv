@@ -1,0 +1,63 @@
+<MiniQuestScreen>:
+    name: 'miniquest'
+
+    # ================= HEADER =================
+    FloatLayout:
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(80)
+            padding: dp(10)
+            spacing: dp(10)
+            pos_hint: {"top": 1}
+            md_bg_color: app.theme_cls.primary_dark
+
+            # Back button
+            MDIconButton:
+                icon: "arrow-left"
+                user_font_size: "32sp"
+                on_release: root.go_back()
+
+            # Logo
+            FitImage:
+                id: logo
+                source: app.app_logo2
+                size_hint: None, None
+                size: dp(50), dp(50)
+                radius: [dp(25)]
+
+            # App Name
+            MDLabel:
+                text: "Lumina"
+                font_size: dp(36)
+                bold: True
+                color: 0.5, 0.93, 1, 1
+                valign: "middle"
+
+    # ================= MIDDLE =================
+    FloatLayout:
+        BoxLayout:
+            id: middle_sector
+            orientation: "vertical"
+            spacing: dp(10)
+            padding: dp(10)
+            pos_hint: {"top": 0.95}
+            size_hint_y: 0.9
+
+            MDLabel:
+                text: "Mini Quest"
+                halign: "center"
+                theme_text_color: "Primary"
+                font_style: "H5"
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+
+                BoxLayout:
+                    id: quiz_container
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(10)
+                    padding: dp(5)
