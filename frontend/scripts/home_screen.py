@@ -1,8 +1,52 @@
 from kivymd.uix.screen import MDScreen
 from kivy.clock import Clock
 from kivy.animation import Animation
+from kivymd.app import MDApp
+from kivy.properties import StringProperty
+
+from backend.tree import Tree
 
 class HomeScreen(MDScreen):
+    tree_image_source = StringProperty("data/user/seedling.jpeg")
+    coins_text = StringProperty("Coins: 0")
+    xp_text = StringProperty("XP: 0")
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.user_tree = None
+        
+    def on_enter(self, *args):
+        print("entered home screen")
+        app = MDApp.get_running_app()
+        self.current_user = app.current_user
+
+        # Initialize user's tree
+        self.user_tree = Tree(self.current_user)
+
+        # Update variables for KV
+        self.tree_image_source = self.user_tree.ui_data["current_image"]
+        self.coins_text = f"Coins: {self.user_tree.ui_data['coins']}"
+        self.xp_text = f"XP: {self.user_tree.ui_data['xp']}"
+
+        print(self.user_tree)
+        print(self.tree_image_source)
+        print(self.xp_text, self.coins_text)
+
+        # Pulse the logo
+        Clock.schedule_once(self._pulse_logo, 0.8)
+
+    def update_tree_ui(self):
+        """Update tree image, XP, and coins in the UI."""
+        progress = self.user_tree.get_progress()
+        
+        # Update tree image
+        tree_image_widget = self.ids.tree_image
+        tree_image_widget.source = progress["current_image"]
+        
+        # Update XP and Coins labels
+        self.ids.xp_label.text = f"XP: {progress['xp']}"
+        self.ids.coins_label.text = f"Coins: {progress['coins']}"
+
     def toggle_menu_panel(self):
         panel = self.ids.menu_slider_panel
         bg = self.ids.slider_bg
@@ -31,11 +75,6 @@ class HomeScreen(MDScreen):
     def hide_menu_panel(self, *args):
         if not self.ids.menu_slider_panel.disabled:
             self.toggle_menu_panel()
-
-    def on_enter(self, *args):
-        print("Home screen entered")
-        # Logo pulse once when entering the screen
-        Clock.schedule_once(self._pulse_logo, 0.8)
 
     def _pulse_logo(self, dt):
         logo = self.ids.get('logo')

@@ -47,18 +47,22 @@ class Authenticate:
             return False
 
     def verify_user(self, email, password):
-        self.c.execute("SELECT password_hash FROM users WHERE email = ?", (email,))
+        self.c.execute("SELECT id, password_hash FROM users WHERE email = ?", (email,))
         row = self.c.fetchone()
         
         if not row:
-            return False
+            return None  # No user found
         
-        stored_hash = row[0]
+        user_id, stored_hash = row
 
         try:
-            return self.ph.verify(stored_hash, password)
+            if self.ph.verify(stored_hash, password):
+                return user_id  # Return actual user id
+            else:
+                return None
         except VerifyMismatchError:
-            return False
+            return None
+
     
 
 
@@ -79,4 +83,4 @@ if __name__ == "__main__":
     auth = Authenticate(folder=folder, db=db)    
 
     auth.run()
-    auth.insert_data(username="Diamond_Hearts", name="Diamond Ebenyo", email="diamond@gmail.com", password="1234567")
+    auth.insert_data(username="Diamond", name="Diamond Heart", email="d", password="1")

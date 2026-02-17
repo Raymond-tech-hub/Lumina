@@ -48,10 +48,11 @@
                 pos_hint: {"x":0.02, "top":0.98}
                 on_release: root.toggle_menu_panel()
 
-            # Tree image centered
+            # Tree image
             FitImage:
-                source: app.tree_image
-                size_hint: 0.5, 0.7 # 50% width, 60% height of middle sector
+                id: tree_image
+                source: root.tree_image_source
+                size_hint: 0.5, 0.7
                 pos_hint: {"center_x":0.5, "y":0.1}
 
             # Coin + XP info horizontally aligned near menu
@@ -61,17 +62,18 @@
                 spacing: 0.05
                 pos_hint: {"x":0.12, "top":0.95}
 
+                # Coins and XP
                 MDLabel:
-                    text: "Coins: 120"
+                    id: coins_label
+                    text: root.coins_text
                     font_style: "H6"
                     color: 1, 0.9, 0, 1
-                    halign: "left"
 
                 MDLabel:
-                    text: "XP: 340"
+                    id: xp_label
+                    text: root.xp_text
                     font_style: "H6"
                     color: 0.5, 1, 0.5, 1
-                    halign: "left"
 
             # Tutor icon (bottom-right)
             ImageButton:

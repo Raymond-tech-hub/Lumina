@@ -1,12 +1,63 @@
-<SubjectCard@MDCard>:
+<TopicRoadmapScreen>:
+    name: "topic_roadmap"
+
+    Image:
+        source: app.biology_wallpaper
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 1
+        pos_hint: {"x": 0, "y": 0}
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "60dp"
+            padding: 10
+            md_bg_color: 0.1,0.6,0.9,1
+            MDLabel:
+                text: "Topic Roadmap"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                theme_text_color: "Custom"
+                text_color: 1,1,0.95,1
+                halign: "center"
+                font_style: "H6"
+
+        ScrollView:
+            MDBoxLayout:
+                id: roadmap_container
+                orientation: "vertical"
+                spacing: 20
+                padding: 20
+                size_hint_y: None
+                height: self.minimum_height
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: "50dp"
+            padding: 10
+            spacing: 10
+            MDFlatButton:
+                text: "Back ⬅"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                text_color: 1,1,0.95,1
+                on_release: app.root.current = "lesson"
+            MDFlatButton:
+                text: "Settings ⚙️"
+                font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                text_color: 1,1,0.95,1
+
+
+<SubjectCard>:
     orientation: "vertical"
     size_hint_y: None
     height: dp(130)
-    padding: dp(15)
-    spacing: dp(10)
+    padding: dp(20)
+    spacing: dp(20)
     radius: [15]
     elevation: 6
-    md_bg_color: 1, 1, 1, 0.85  # semi-transparent white
+    md_bg_color: 0.95,0.95,0.95,0.7
 
     MDLabel:
         id: title
@@ -15,26 +66,30 @@
         bold: True
         font_name: "C:/Windows/Fonts/seguiemj.ttf"
         theme_text_color: "Custom"
-        text_color: 0.1, 0.2, 0.3, 1
+        text_color: 0.1, 0.45, 0.8, 1
         halign: "left"
 
     MDLabel:
         id: description
         text: ""
         font_size: "14sp"
+        font_name: "C:/Windows/Fonts/seguiemj.ttf"
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 1
         halign: "left"
+        padding: dp(0), dp(4)
 
     MDProgressBar:
         id: progress
         value: 0
         color: 0.1, 0.6, 0.9, 1
 
-    MDFlatButton:
-        id: select_btn
-        text: "Select ▶"
-        font_name: "C:/Windows/Fonts/seguiemj.ttf"
-        size_hint_y: None
-        height: dp(36)
+    #MDFlatButton:
+        #id: select_btn
+        #text: "Select ▶"
+        #font_name: "C:/Windows/Fonts/seguiemj.ttf"
+        #size_hint_y: None
+        #height: dp(36)
 
 
 <LessonScreen>:

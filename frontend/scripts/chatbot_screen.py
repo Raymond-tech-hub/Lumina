@@ -42,7 +42,7 @@ class ChatBotScreen(MDScreen):
             adaptive_height=True,
             padding=dp(10),
             radius=[15, 15, 15, 0],
-            md_bg_color = (75, 0, 130, 1),  
+            md_bg_color = (0, 0, 130, 1),  
             elevation=2,
         )
 

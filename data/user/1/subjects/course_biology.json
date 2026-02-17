@@ -1,0 +1,133 @@
+{
+  "subject": {
+    "id": "biology",
+    "name": "Biology",
+    "emoji": "🌿",
+    "description": "Plants, animals, ecosystems.",
+    "class": "Form 2",
+    "syllabus": "KLB",
+    "hint_limit": 3
+  },
+  "topics": [
+    {
+      "id": "osmosis",
+      "name": "🌊 Mission 1: Save the Dying Plant (Osmosis)",
+      "short_description": "Movement of water across cell membranes",
+      "content": [
+        {
+          "subtopic": "HOOK",
+          "text": "🎯 Why do your fingers wrinkle in water? Osmosis is responsible!"
+        },
+        {
+          "subtopic": "STORY",
+          "text": "📖 Imagine water molecules as students moving from a crowded room to an empty one."
+        },
+        {
+          "subtopic": "CORE IDEA",
+          "text": "🧠 Osmosis is the movement of water across a semi-permeable membrane."
+        },
+        {
+          "subtopic": "MEMORY CODE",
+          "text": "⚡ H2L → Water moves from High to Low concentration."
+        },
+        {
+          "subtopic": "IMPORTANCE",
+          "text": "🌿 Keeps plant cells turgid and animals balanced."
+        },
+        {
+          "subtopic": "REAL LIFE",
+          "text": "🧩 When a plant is placed in salty water, it shrinks because water leaves the cell."
+        },
+        {
+          "subtopic": "CHALLENGE",
+          "text": "🎮 Predict what happens to a plant in pure water before moving on."
+        },
+        {
+          "subtopic": "Diagram",
+          "text": "🖼 [osmosis.png]"
+        }
+      ],
+      "diagram": "osmosis.png"
+    },
+    {
+      "id": "photosynthesis",
+      "name": "🌞 Mission 2: Power the Sun Temple (Photosynthesis)",
+      "short_description": "How plants produce food from sunlight",
+      "content": [
+        {
+          "subtopic": "HOOK",
+          "text": "🎯 Plants create food using sunlight!"
+        },
+        {
+          "subtopic": "STORY",
+          "text": "📖 Imagine a factory inside leaves converting sunlight into sugar."
+        },
+        {
+          "subtopic": "CORE IDEA",
+          "text": "🧠 Photosynthesis converts CO2 + H2O into Glucose + O2."
+        },
+        {
+          "subtopic": "MEMORY TRICK",
+          "text": "⚡ 6-6 makes 1-6."
+        },
+        {
+          "subtopic": "EQUATION",
+          "text": "🧪 6CO2 + 6H2O → C6H12O6 + 6O2"
+        },
+        {
+          "subtopic": "LOCATION",
+          "text": "🌿 Happens inside chloroplasts."
+        },
+        {
+          "subtopic": "CHALLENGE",
+          "text": "🎮 What would happen if there was no sunlight?"
+        },
+        {
+          "subtopic": "Diagram",
+          "text": "🖼 [photosynthesis.png]"
+        }
+      ],
+      "diagram": "photosynthesis.png"
+    },
+    {
+      "id": "respiration",
+      "name": "🔥 Mission 3: Activate the Energy Core (Respiration)",
+      "short_description": "How cells release energy from food",
+      "content": [
+        {
+          "subtopic": "HOOK",
+          "text": "🎯 Your body is constantly burning glucose for energy."
+        },
+        {
+          "subtopic": "STORY",
+          "text": "📖 Think of mitochondria as power plants inside your cells."
+        },
+        {
+          "subtopic": "CORE IDEA",
+          "text": "🧠 Respiration breaks down glucose using oxygen to release energy."
+        },
+        {
+          "subtopic": "MEMORY LINK",
+          "text": "⚡ Opposite of photosynthesis."
+        },
+        {
+          "subtopic": "EQUATION",
+          "text": "🧪 C6H12O6 + 6O2 → 6CO2 + 6H2O + ATP"
+        },
+        {
+          "subtopic": "LOCATION",
+          "text": "🏭 Happens in mitochondria."
+        },
+        {
+          "subtopic": "CHALLENGE",
+          "text": "🎮 Why do athletes breathe heavily after running?"
+        },
+        {
+          "subtopic": "Diagram",
+          "text": "🖼 [respiration.png]"
+        }
+      ],
+      "diagram": "respiration.png"
+    }
+  ]
+}

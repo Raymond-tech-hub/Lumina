@@ -16,7 +16,7 @@ from kivymd.uix.screen import MDScreen
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load course content JSON
-with open(os.path.join(BASE_DIR, "course_data.json")) as f:
+with open(os.path.join(BASE_DIR, "sample_quiz.json")) as f:
     course_data = json.load(f)
 
 # Load user progress JSON if exists, otherwise create empty

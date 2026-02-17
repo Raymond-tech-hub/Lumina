@@ -1,0 +1,71 @@
+{"1": {
+      "tree": {
+        "name": "Lumina Tree",
+        "xp": 100,
+        "coins": 120,
+        "stage": "Sapling 🌿",
+        "stages": [
+          {
+            "name": "Seedling 🌱",
+            "xp_required": 0,
+            "image": "data/user/seedling.jpeg"
+          },
+          {
+            "name": "Sapling 🌿",
+            "xp_required": 100,
+            "image": "data/user/sapling.jpeg"
+          },
+          {
+            "name": "Young Tree 🌳",
+            "xp_required": 250,
+            "image": "data/user/young.jpeg"
+          },
+          {
+            "name": "Mature Tree 🌲",
+            "xp_required": 500,
+            "image": "data/user/tree_mature.jpeg"
+          },
+          {
+            "name": "Grand Tree 🌴",
+            "xp_required": 1000,
+            "image": "data/user/grand.jpeg"
+          }
+        ]
+      }
+    },
+    "2": {
+      "tree": {
+        "name": "Lumina Tree",
+        "xp": 50,
+        "coins": 20,
+        "stage": "Seedling 🌱",
+        "stages": [
+          {
+            "name": "Seedling 🌱",
+            "xp_required": 0,
+            "image": "images/tree_seedling.png"
+          },
+          {
+            "name": "Sapling 🌿",
+            "xp_required": 100,
+            "image": "images/tree_sapling.png"
+          },
+          {
+            "name": "Young Tree 🌳",
+            "xp_required": 250,
+            "image": "images/tree_young.png"
+          },
+          {
+            "name": "Mature Tree 🌲",
+            "xp_required": 500,
+            "image": "images/tree_mature.png"
+          },
+          {
+            "name": "Grand Tree 🌴",
+            "xp_required": 1000,
+            "image": "images/tree_grand.png"
+          }
+        ]
+      }
+    }
+  }

@@ -8,19 +8,8 @@ class ChatBot:
         self.response_file = response_file
         self.fact_file = fact_file
         self.greetings = ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "howdy", "how are you"]
-        self.help = """### **1. Gamify the Learning**
+        self.help = """### **1. 
 
-* **Points and Rewards:** Give points for completing lessons, quizzes, or daily tasks. Unlock badges or cosmetic rewards.
-* **Levels & Progression:** Visualize progress like a “level-up” system. Learners see improvement over time.
-* **Challenges & Mini-Games:** Integrate small puzzles, timed challenges, or memory games related to the lesson content.
-
----
-
-### **2. Make it Interactive**
-
-* **Drag-and-Drop & Matching:** Replace long text exercises with interactive exercises.
-* **Simulations & Scenarios:** Let learners experiment in realistic contexts (e.g., virtual labs, real-life scenarios).
-* **Branching Lessons:** Depending on choices, learners follow different storylines or outcomes.
 """
         
     def load_database(self, db_file):

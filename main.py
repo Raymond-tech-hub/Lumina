@@ -6,8 +6,25 @@ dname = os.path.dirname(abspath)
 os.chdir(dname)          
 print("Working directory set to:", os.getcwd())
 
-if os.path.exists(os.path.join("data/user", "001")):
-    print("graph path exists")
+
+import sys
+
+os.environ["KIVY_NO_ARGS"] = "1"
+bypass_login = False
+default_user_id = None
+
+# Example usage:
+# python main.py --bypass 1
+# "--bypass 1" means skip login and use user ID 1
+
+if "--bypass" in sys.argv:
+    bypass_index = sys.argv.index("--bypass")
+    if len(sys.argv) > bypass_index + 1:
+        default_user_id = sys.argv[bypass_index + 1]
+        bypass_login = True
+
+
+
 
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import ScreenManager
@@ -27,6 +44,8 @@ from frontend.scripts.quiz_screen import QuizScreen
 from frontend.scripts.profile_screen import ProfileScreen
 from frontend.scripts.chatbot_screen import ChatBotScreen
 from frontend.scripts.lesson_screen import LessonScreen
+from frontend.scripts.lesson_screen import TopicRoadmapScreen
+from frontend.scripts.lesson_progress_screen import LessonProgressScreen
 
 from kivy.core.audio import SoundLoader
 from time import sleep
@@ -48,6 +67,12 @@ class LuminaScreenManager(ScreenManager):
 #Window.size = (600, 700)
 
 class LuminaApp(MDApp):
+    def __init__(self, bypass=False, default_user_id=None, **kwargs):
+        super().__init__(**kwargs)
+        self.bypass_login = bypass
+        self.default_user_id = default_user_id
+        self.current_user = None
+
     # Main application class
     # ------- GLOBAL Assets & Configuration -------
     loading_image = config["Assets"]["loading_image"]
@@ -78,8 +103,13 @@ class LuminaApp(MDApp):
     theme2 =  config["Sounds"]["theme2"]
 
     def on_start(self):
-        # Called after the app is fully built
         self.start_background_music()
+
+        if self.bypass_login and self.default_user_id:
+            print(f"Bypass active: logging in as user {self.default_user_id}")
+            self.load_user_graphs(self.default_user_id)
+            # Skip login screen, go straight to home
+            self.root.current = "home"
 
     def start_background_music(self):
         def play_music():
@@ -100,22 +130,40 @@ class LuminaApp(MDApp):
         music_thread = threading.Thread(target=play_music, daemon=True)
         music_thread.start()
 
-    current_user = "001"
-
+    current_user = None
     graphs = []
-    
-    graph_path = os.listdir(os.path.join("data/user", current_user))
-    print("graph:", graph_path)
-    for file in graph_path:
-        _, ext = os.path.splitext(file)
-        if ext.lower() == ".png":
-            graphs.append(file)
+    current_id = 0
+    current_graph = None
 
-    print("graph:", graphs)
-    current_id = 2
-    current_graph = os.path.join("data/user", current_user, graphs[current_id])
 
-    print(graphs)
+    def load_user_graphs(self, user_id):
+        self.current_user = str(user_id)  # store current user
+        user_folder = os.path.join("data/user", self.current_user)
+
+        if not os.path.exists(user_folder):
+            print(f"No folder for user {self.current_user}")
+            self.graphs = []
+            self.current_graph = None
+            return
+
+        self.graphs = [f for f in os.listdir(user_folder) if f.lower().endswith(".png")]
+        self.current_id = 0
+
+        if self.graphs:
+            self.current_graph = os.path.join(user_folder, self.graphs[0])
+            # Update home screen if loaded
+            try:
+                home_screen = self.root.get_screen("home")
+                home_screen.ids.graph_image.source = self.current_graph
+                home_screen.ids.graph_image.reload()
+            except Exception as e:
+                print("Home screen not ready yet:", e)
+        else:
+            self.current_graph = None
+
+        print(f"User {self.current_user} graphs loaded: {self.graphs}")
+
+
     Name = config["AppConfig"]["Name"]
     version = config["AppConfig"]["Version"]
 
@@ -130,12 +178,16 @@ class LuminaApp(MDApp):
             self.update_graph_image()
 
     def update_graph_image(self):
-        # Update the image on the HomeScreen
+        if not self.graphs:
+            print("No graphs to display")
+            return
+
         home_screen = self.root.get_screen("home")
         home_screen.ids.graph_image.source = os.path.join(
             "data/user", self.current_user, self.graphs[self.current_id]
         )
-        home_screen.ids.graph_image.reload()  # Force reload
+        home_screen.ids.graph_image.reload()
+
 
     def build(self):
         self.theme_cls.primary_palette = "Blue"
@@ -163,6 +215,8 @@ class LuminaApp(MDApp):
         sm.add_widget(QuizScreen(name="quiz"))
         sm.add_widget(ChatBotScreen(name="tutor"))
         sm.add_widget(LessonScreen(name="lesson"))
+        sm.add_widget(TopicRoadmapScreen(name='topic_roadmap'))
+        sm.add_widget(LessonProgressScreen(name="lesson_progress"))
 
         sm.current = "loading"
 
@@ -172,4 +226,5 @@ class ImageButton(ButtonBehavior, AsyncImage):
     pass
 
 if __name__ == "__main__":
-    LuminaApp().run()
+    app = LuminaApp(bypass=bypass_login, default_user_id=default_user_id)
+    app.run()

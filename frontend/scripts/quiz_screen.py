@@ -17,15 +17,29 @@ from kivy.animation import Animation
 class QuizScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.json_path = "data/course_data.json"
+        self.json_path = "data/sample_quiz.json"
         self.quiz_index = 0   # current question
         self.score = 0        # total correct answers
         self.questions = []  
 
     def on_enter(self, *args):
-        print("Home screen entered")
-        # Logo pulse once when entering the screen
+        print("Quiz screen entered")
         Clock.schedule_once(self._pulse_logo, 0.8)
+
+        # Load JSON
+        self.load()
+
+        # Pick a subject and topic
+        subject = "biology"
+        topic_index = 0  # first topic
+
+        self.questions = self.get_topic_quiz(subject, topic_index)
+        self.quiz_index = 0
+        self.score = 0
+
+        # Display first question
+        self.display_question()
+
 
     def _pulse_logo(self, dt):
         logo = self.ids.get('logo')
@@ -77,9 +91,9 @@ class QuizScreen(MDScreen):
         if not topics:
             return []
         topic = topics[topic_index]
-        return topic.get("quiz", [])
+        return topic.get("questions", [])
 
-    def on_enter(self):
+    '''def on_enter(self):
         # Load JSON
         self.load()
 
@@ -92,7 +106,7 @@ class QuizScreen(MDScreen):
         self.score = 0
 
         # Display first question
-        self.display_question()
+        self.display_question()'''
 
     def display_question(self):
         container = self.ids.quiz_container

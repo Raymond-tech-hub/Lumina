@@ -1,0 +1,48 @@
+{
+    "1": {
+        "subjects": [
+            {
+                "id": "biology",
+                "name": "Biology",
+                "emoji": "\ud83c\udf3f",
+                "lessons": 3,
+                "completed": 0,
+                "description": "Plants, animals, ecosystems."
+            },
+            {
+                "id": "physics",
+                "name": "Physics",
+                "emoji": "\u26a1",
+                "lessons": 8,
+                "completed": 2,
+                "description": "Motion, energy, forces."
+            },
+            {
+                "id": "math",
+                "name": "Math",
+                "emoji": "\u2797",
+                "lessons": 10,
+                "completed": 3,
+                "description": "Numbers, algebra, geometry."
+            },
+            {
+                "id": "chemistry",
+                "name": "Chemistry",
+                "emoji": "\u2697\ufe0f",
+                "lessons": 7,
+                "completed": 0,
+                "description": "Matter, reactions, elements."
+            }
+        ]
+    },
+    "subjects": [
+        {
+            "id": "biology",
+            "name": "Biology",
+            "emoji": "\ud83c\udf3f",
+            "lessons": 3,
+            "completed": 3,
+            "description": "Plants, animals, ecosystems."
+        }
+    ]
+}
