@@ -101,6 +101,7 @@ class LuminaApp(MDApp):
     biology_wallpaper = config["Assets"]["biology_wallpaper"]
     quiz_wallpaper = "frontend/assets/images/wallpapers/quiz_wallpaper.jpg"
     timetable_wallpaper = "frontend/assets/images/wallpapers/timetable_wallpaper.jpg"   
+    mini_quest_wallpaper = config["Assets"]["mini_quest_wallpaper"]
 
     theme1 =  config["Sounds"]["theme1"]
     theme2 =  config["Sounds"]["theme2"]

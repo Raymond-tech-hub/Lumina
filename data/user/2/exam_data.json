@@ -1,0 +1,11 @@
+{
+    "ID": 2,
+    "Name": "AVa Heart",
+    "Subjects": ["Math", "English", "Kiswahili", "Computer"],
+    "Exams": 4,
+    "Math": [23, 54, 82, 94],
+    "English": [64, 72, 68, 82],
+    "Kiswahili": [58, 62, 55, 68],
+    "Computer": [92, 98, 100, 94],
+    "Status": "Excellent"
+}

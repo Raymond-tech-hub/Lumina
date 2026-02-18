@@ -42,54 +42,57 @@
                     size: dp(50), dp(50)
 
         # ================= MIDDLE_SECTOR =================
-        MDFloatLayout:
+        ScrollView:
+            do_scroll_x: False
+            size_hint_y: 1
 
-            MDCard:
-                size_hint: None, None
-                size: "340dp", "580dp"
-                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                padding: "40dp", "60dp", "40dp", "40dp"   # top, right, bottom, left
-                radius: [32]
-                md_bg_color: 1, 1, 1, 0.09
-
-                # Glass border + shadow
-                canvas.before:
-                    Color:
-                        rgba: 1, 1, 1, 0.18
-                    Line:
-                        rounded_rectangle: self.x+2, self.y+2, self.width-4, self.height-4, 32
-                        width: 1.2
-                    Color:
-                        rgba: 0, 0, 0, 0.25
-                    RoundedRectangle:
-                        pos: self.x + dp(8), self.y + dp(8)
-                        size: self.width - dp(16), self.height - dp(16)
-                        radius: [28]
-
-                # Content inside the card
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                size_hint_y: None
+                height: dp(12)
+            
                 MDBoxLayout:
+                    id: graph
                     orientation: "vertical"
-                    spacing: "28dp"
-                    adaptive_height: True
+                    padding: dp(20)
                     size_hint_y: None
-                    height: self.minimum_height
-                    width: self.parent.width  # <-- fill card horizontally
-                    padding: 0
-                    pos_hint: {"center_x": 0.5}  # <-- centers content horizontally
+                    height: dp(250)
 
-                    # Graph centered
-                    AnchorLayout:
+
+                    MDLabel:
+                        text: "Profile"
+                        font_style: "H6"
                         size_hint_y: None
-                        height: "130dp"
-                        anchor_x: "center"
-                        anchor_y: "center"
+                        height: self.texture_size[1]
 
-                        FitImage:
-                            source: app.current_graph
-                            size_hint: None, None
-                            size: "300dp", "300dp"
-                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                            allow_stretch: True
+                    ScrollView:
+                        do_scroll_x: False
+
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            adaptive_height: True
+                            spacing: dp(1)
+
+                            # ---------- Graph screen ----------
+                            MDCard:
+                                size_hint_y: None
+                                height: dp(200)  # card height
+                                radius: dp(12)
+                                elevation: 3
+                                padding: dp(12)
+
+                                MDBoxLayout:
+                                    orientation: "vertical"
+                                    adaptive_height: True
+                                    spacing: dp(8)
+
+                                FitImage:
+                                    source: app.current_graph
+                                    size_hint: None, None
+                                    size: "300dp", "300dp"
+                                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                                    allow_stretch: True
 
 
 

@@ -21,6 +21,7 @@
 
         "login_wallpaper": "frontend/assets/images/wallpapers/login_wallpaper.jpg",
         "subject_wallpaper": "frontend/assets/images/wallpapers/subject_wallpaper.jpeg",
+        "mini_quest_wallpaper": "frontend/assets/images/wallpapers/mini_quest_wallpaper.jpg",
         "biology_wallpaper": "frontend/assets/images/wallpapers/biology_wallpaper.jpeg"
 
     },
