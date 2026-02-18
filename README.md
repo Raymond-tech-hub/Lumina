@@ -30,4 +30,7 @@ Goal: To guide students with intelligence, clarity and a spark of curiosity
 
 Lumina is an intelligent system born from my desire for clarity, autonomy and mastery to bring order where life feels disordered.
 It's meant to restore order in broken school systems, through autonomy and intelligence. 
-Lumina restores light in the academic ruins in....                                
+Lumina restores light in the academic ruins in....      
+
+in one sentence:
+    Lumina is an intelligent, gamified learning system that transforms curriculum content into a guided, visually rich, and motivating educational journey.
