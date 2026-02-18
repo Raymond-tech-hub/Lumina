@@ -34,3 +34,5 @@ Lumina restores light in the academic ruins in....
 
 in one sentence:
     Lumina is an intelligent, gamified learning system that transforms curriculum content into a guided, visually rich, and motivating educational journey.
+
+core system - Lumina harnesses the seamless power of AI to transform learning into an engaging, fun, and purpose-driven experience.
