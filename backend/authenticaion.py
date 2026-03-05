@@ -8,7 +8,8 @@ class Authenticate:
         self.folder = folder
         self.db = db
         self.path = os.path.join(folder, db)
-        self.conn = sqlite3.connect(self.path)
+        #self.conn = sqlite3.connect(self.path)
+        self.conn = sqlite3.connect(self.path, timeout=5)
         self.c = self.conn.cursor() 
         self. ph = PasswordHasher(
             time_cost=3,
@@ -17,6 +18,10 @@ class Authenticate:
             hash_len=32,
             salt_len=16
         )
+
+    def close(self):
+        if self.conn:
+            self.conn.close()
 
     def create_table(self):
         try:
