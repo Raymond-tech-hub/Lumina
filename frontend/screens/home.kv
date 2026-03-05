@@ -126,6 +126,11 @@
                     text: "About"
                     md_bg_color: app.theme_cls.primary_color
                     on_release: print("About clicked")
+                
+                MDRaisedButton:
+                    text: "Log out"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.go_login()
 
 
         # ================= FOOTER =================

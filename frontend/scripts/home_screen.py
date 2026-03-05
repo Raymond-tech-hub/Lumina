@@ -111,6 +111,10 @@ class HomeScreen(MDScreen):
         print("entering lesson")
         self.manager.current = "lesson"
 
+    def go_login(self):
+        print("entering login")
+        self.manager.current = "login"
+
 '''def start_logo_pulse(self, dt):
         logo = self.ids.logo
         if logo:

@@ -1,6 +1,7 @@
 import json
 import random
 import difflib
+import time
 
 class ChatBot:
     def __init__(self, name, response_file, fact_file):
@@ -8,8 +9,8 @@ class ChatBot:
         self.response_file = response_file
         self.fact_file = fact_file
         self.greetings = ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "howdy", "how are you"]
-        self.help = """### **1. 
-
+        self.help = """
+                My name is Ava -  your fun AI pal, \n I\'ll be guiding you on this journey......
 """
         
     def load_database(self, db_file):
@@ -21,6 +22,10 @@ class ChatBot:
             print(f"Error loading data file: {db_file} > {e}")
         return database            
             
+    def action_time(self):
+        current_time = time.strftime('%H:%M:%S')
+        return f'current time is: {current_time}'
+
     def get_response(self, user_input):
         data = self.load_database(self.fact_file)
         best_match = None
@@ -29,6 +34,10 @@ class ChatBot:
 
         if 'help' in user_input:
             return self.help
+
+        elif any(t in user_input for t in ["what is the time", "current time"]):
+            return self.action_time
+        
 
         # Iterate through each entry in the data
         for entry in data:

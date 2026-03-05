@@ -1,0 +1,132 @@
+{
+  "subject": {
+    "id": "biology",
+    "name": "Biology",
+    "emoji": "🌿",
+    "description": "Plants, animals, ecosystems.",
+    "class": "Form 2",
+    "syllabus": "KLB",
+    "hint_limit": 3
+  },
+  "topics": [
+    {
+      "id": "osmosis",
+      "name": "🌊 Mission 1: Save the Dying Plant (Osmosis)",
+      "short_description": "Movement of water across cell membranes",
+      "content": [         
+      {
+        "subtopic": "QUESTION",
+        "text": "🎯 Why do your fingers wrinkle in water?\n💧 Osmosis is responsible!\n🌊 Water moves in and out of your skin cells causing them to shrink and wrinkle.\n🤔 It's your body's clever way of improving grip underwater!"
+      },
+      {
+        "subtopic": "STORY",
+        "text": "📖 Imagine water molecules as students 🧑‍🎓🧑‍🎓 moving from a crowded room 🏫 to an empty one 🏠.\n💦 They spread out naturally, just like water does across a semi-permeable membrane.\n😂 Funny right? Your skin cells do the same thing!"
+      },
+      {
+        "subtopic": "CORE IDEA",
+        "text": "🧠 Osmosis is the movement of water 💧 across a semi-permeable membrane 🛡️.\n🌿 It happens in plants to keep cells turgid 🌱 and in animals to maintain balance ⚖️.\n🔬 It's a basic but super important biological process!"
+      },
+      {
+        "subtopic": "MEMORY CODE",
+        "text": "⚡ H2L → Water moves from High 🌊 to Low 💧 concentration.\n💡 Remember: Think of a slide 🛝, water always goes downhill!\n🎯 Quick trick: High → Low, Osmosis flow!"
+      },
+      {
+        "subtopic": "IMPORTANCE",
+        "text": "🌿 Keeps plant cells turgid 💪 and animals balanced ⚖️.\n💧 Without osmosis, plants wilt 🌱 and our bodies get dehydrated 😰.\n✨ It's nature's way of maintaining harmony!"
+      },
+      {
+        "subtopic": "REAL LIFE",
+        "text": "🧩 When a plant 🌿 is placed in salty water 🧂, it shrinks 😮 because water leaves the cell 🚪💨.\n💦 Conversely, in pure water 💧 it swells 💚. Try it as a fun experiment!"
+      },
+      {
+        "subtopic": "CHALLENGE",
+        "text": "🎮 Predict what happens to a plant 🌱 in pure water 💧 before moving on.\n🕵️‍♂️ Think like a scientist 🔬: where will the water go?\n🤔 Hint: High → Low!"
+      }
+    ],
+      "diagram": "osmosis.png"
+    },
+    {
+      "id": "photosynthesis",
+      "name": "🌞 Mission 2: Power the Sun Temple (Photosynthesis)",
+      "short_description": "How plants produce food from sunlight",
+      "content": [
+        {
+          "subtopic": "HOOK",
+          "text": "🎯 Plants create food using sunlight!"
+        },
+        {
+          "subtopic": "STORY",
+          "text": "📖 Imagine a factory inside leaves converting sunlight into sugar."
+        },
+        {
+          "subtopic": "CORE IDEA",
+          "text": "🧠 Photosynthesis converts CO2 + H2O into Glucose + O2."
+        },
+        {
+          "subtopic": "MEMORY TRICK",
+          "text": "⚡ 6-6 makes 1-6."
+        },
+        {
+          "subtopic": "EQUATION",
+          "text": "🧪 6CO2 + 6H2O → C6H12O6 + 6O2"
+        },
+        {
+          "subtopic": "LOCATION",
+          "text": "🌿 Happens inside chloroplasts."
+        },
+        {
+          "subtopic": "CHALLENGE",
+          "text": "🎮 What would happen if there was no sunlight?"
+        },
+        {
+          "subtopic": "Diagram",
+          "text": "🖼 [photosynthesis.png]"
+        }
+      ],
+      "diagram": "photosynthesis.png"
+    },
+    {
+      "id": "respiration",
+      "name": "🔥 Mission 3: Activate the Energy Core (Respiration)",
+      "short_description": "How cells release energy from food",
+      "content": [
+        {
+          "subtopic": "HOOK",
+          "text": "🎯 Your body is constantly burning glucose for energy."
+        },
+        {
+          "subtopic": "STORY",
+          "text": "📖 Think of mitochondria as power plants inside your cells."
+        },
+        {
+          "subtopic": "CORE IDEA",
+          "text": "🧠 Respiration breaks down glucose using oxygen to release energy."
+        },
+        {
+          "subtopic": "MEMORY LINK",
+          "text": "⚡ Opposite of photosynthesis."
+        },
+        {
+          "subtopic": "EQUATION",
+          "text": "🧪 C6H12O6 + 6O2 → 6CO2 + 6H2O + ATP"
+        },
+        {
+          "subtopic": "LOCATION",
+          "text": "🏭 Happens in mitochondria."
+        },
+        {
+          "subtopic": "CHALLENGE",
+          "text": "🎮 Why do athletes breathe heavily after running?"
+        },
+        {
+          "subtopic": "Diagram",
+          "text": "🖼 [respiration.png]"
+        }
+      ],
+      "diagram": "respiration.png"
+    }
+  ]
+}
+
+
+

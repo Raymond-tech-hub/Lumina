@@ -1,11 +1,31 @@
-
-# LUMINA/frontend/screens/loading.kv
 <LoadingScreen>:
-    name: 'loading'  # Ties this rule to LoadingScreen class
+    name: 'loading'
+
+    # Fullscreen background image
+    Image:
+        source: app.loading_image #if hasattr(root, 'image_path') else ""
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 1
+        pos_hint: {"x": 0, "y": 0}
+
     FloatLayout:
-        Image:
-            source: app.loading_image
-            allow_stretch: True
-            keep_ratio: False
-            size_hint: 1, 1
-            pos_hint: {"x": 0, "y": 0}
+        # Loading text
+        MDLabel:
+            id: loading_text
+            text: "Loading"
+            font_size: 24
+            color: (1, 1, 1, 1)
+            halign: "left"
+            size_hint: None, None
+            #size: self.texture_size
+            pos_hint: {"x": 0.05, "y": 0.08}  # Lower-left above the slider
+
+        # Loading slider at the bottom
+        MDProgressBar:
+            id: loading_slider
+            value: 0
+            max: 100
+            pos_hint: {"x": 0.05, "y": 0.03}  # Slightly above the bottom
+            size_hint_x: 0.9
+            color: app.theme_cls.primary_color

@@ -4,6 +4,13 @@
 
 <ChatBotScreen>:
     name: "chatbot"
+    Image:
+        source: app.tutor_wallpaper
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 1
+        pos_hint: {"x": 0, "y": 0}
+
     MDBoxLayout:
         orientation: "vertical"
 
@@ -15,7 +22,7 @@
             padding: dp(10)
             spacing: dp(5)
 
-            # 🔙 Built-in KivyMD Back Icon
+            # Back icon
             MDIconButton:
                 icon: "arrow-left"
                 theme_text_color: "Custom"

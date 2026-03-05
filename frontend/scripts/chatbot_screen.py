@@ -12,6 +12,7 @@ from backend.ChatBot.chatbot import ChatBot
 from backend.ChatBot.voice import Voice
 from backend.ChatBot.token_simulation import TokenSimulation
 
+import time
 
 global_msg = ''
 
@@ -24,6 +25,10 @@ class ChatBotScreen(MDScreen):
         self.Chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
         self.token_sim = TokenSimulation()
          
+    def action_time(self):
+        current_time = time.strftime('%H:%M:%S')
+        return f"current time is: {current_time}"
+
     def go_back(self):
         print("entering home")
         self.manager.current = "home"
@@ -162,7 +167,11 @@ class ChatBotScreen(MDScreen):
         self.add_user_message(msg)
         self.ids.user_input.text = ""
 
-        response = self.Chatbot.get_response(msg)
+        if any(time in msg for time in ["what is the time", "current time"]):
+            response =  str(self.action_time)
+        else:
+            response = self.Chatbot.get_response(msg)
+            response = str(response)
 
         # 🔥 Add thinking bubble
         thinking_widget = self.add_thinking_bubble()
