@@ -5,6 +5,7 @@ from kivymd.uix.screen import MDScreen
 from backend.authenticaion import Authenticate
 import re
 import os
+import sqlite3
 
 class LoginScreen(MDScreen):
     def on_enter(self):
@@ -15,23 +16,24 @@ class LoginScreen(MDScreen):
         password = self.ids.password_field.text.strip()
         folder = "data/user"
         database_file = "auth.db" 
+        try:
+            auth = Authenticate(folder=folder, db=database_file)
+            print("Login attempt initiated")
 
-        auth = Authenticate(folder=folder, db=database_file)
-        print("Login attempt initiated")
-
-        user_id = auth.verify_user(email, password)
-        if user_id :
-            print("Login successful!")
-            # Set the app's current user
-            app = MDApp.get_running_app()
-            app.load_user_graphs(user_id)  # loads graphs & sets current_user
-            self.manager.current = "home"
-        else:
-            self.ids.password_field.error = True
-            self.ids.password_field.helper_text = "Incorrect email or password"
-            print("Login failed")
-
-
+            user_id = auth.verify_user(email, password)
+            if user_id :
+                print("Login successful!")
+                # Set the app's current user
+                app = MDApp.get_running_app()
+                app.load_user_graphs(user_id)  # loads graphs & sets current_user
+                self.manager.current = "home"
+            else:
+                self.ids.password_field.error = True
+                self.ids.password_field.helper_text = "Incorrect email or password"
+                print("Login failed")
+        except sqlite3.OperationalError:
+                auth.create_table()
+                print("from login screen: OperationalError, created users table!!!!!")
 
     def switch_to_signup(self):
         self.manager.current = "signup"

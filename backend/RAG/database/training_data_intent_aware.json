@@ -6,7 +6,7 @@
             "define osmosis",
             "explain what osmosis is"
         ],
-        "positive": "Definition: Osmosis is the movement of water molecules through a semi-permeable membrane.",
+        "positive": "Definition: Osmosis is the movement of water molecules from a region of high water concentration to a region of low water concentration through a semi-permeable membrane.",
         "negatives": [
             "Osmosis makes plant cells firm and provides support to the plant.",
             "Plants absorb water from the soil by osmosis through root hair cells.",
@@ -77,6 +77,20 @@
             "explain the importance of osmosis in animals"
         ],
         "positive": "Importance animals: Osmosis maintains the correct water balance in animal cells, preventing them from bursting or shrinking.",
+        "negatives": [
+            "Osmosis is the movement of water molecules through a semi-permeable membrane.",
+            "Osmosis makes plant cells firm and provides support to the plant.",
+            "Plants absorb water from the soil by osmosis through root hair cells."
+        ]
+    },
+    {
+        "intent": "greetings",
+        "queries": [
+            "hello", "hi", "hey", "greetings", 
+            "good morning", "good afternoon", 
+            "howdy", "how are you"
+        ],
+        "positive": "greetings: How are you today young explorer? Ready to explorer and build your curiosity",
         "negatives": [
             "Osmosis is the movement of water molecules through a semi-permeable membrane.",
             "Osmosis makes plant cells firm and provides support to the plant.",

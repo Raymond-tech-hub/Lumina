@@ -1,0 +1,86 @@
+If you want to run Java files **outside of VS Code**, you can do it using the **command line** or a standalone IDE. Here’s a clear breakdown:
+
+---
+
+## **1. Using the Command Line (Terminal / Command Prompt)**
+
+### **Step 1: Install Java**
+
+Make sure you have the **Java Development Kit (JDK)** installed.
+
+* Check if Java is installed:
+
+```bash
+java -version
+javac -version
+```
+
+* If not installed, download **JDK 20 or 21** from [Oracle](https://www.oracle.com/java/technologies/javase-jdk20-downloads.html) or [Adoptium](https://adoptium.net/).
+* Set your `JAVA_HOME` environment variable (optional but recommended) and add `bin` to your `PATH`.
+
+---
+
+### **Step 2: Compile the Java file**
+
+Assume your file is `HelloWorld.java`.
+
+```bash
+javac HelloWorld.java
+```
+
+* This will generate a `HelloWorld.class` file (bytecode).
+
+---
+
+### **Step 3: Run the compiled Java class**
+
+```bash
+java HelloWorld
+```
+
+* Output example:
+
+```
+Hello, World!
+```
+
+✅ Notes:
+
+* Don’t include `.class` in the `java` command.
+* Make sure you’re in the directory containing the `.java` file.
+
+---
+
+## **2. Using a Standalone IDE (No VS Code)**
+
+You can also run Java files in an IDE designed for Java:
+
+* **Eclipse** – Full-featured Java IDE, free. ([eclipse.org](https://www.eclipse.org/))
+* **IntelliJ IDEA Community Edition** – Lightweight and modern Java IDE. ([jetbrains.com/idea](https://www.jetbrains.com/idea/download/))
+* **NetBeans** – Another free, all-in-one Java IDE. ([netbeans.apache.org](https://netbeans.apache.org/))
+
+**Steps inside IDE:**
+
+1. Create a new Java project.
+2. Add your `.java` files to `src`.
+3. Click **Run** (usually a green triangle ▶️).
+4. The IDE handles compilation and execution automatically.
+
+---
+
+## **3. Optional: Run Java from a Single File (No Compilation Step)**
+
+Since **JDK 11**, you can run Java directly without manually compiling:
+
+```bash
+java HelloWorld.java
+```
+
+* Java will automatically compile and run the file in one step.
+* Good for small scripts or testing.
+
+---
+
+If you want, I can also give you a **ready-to-copy command template** to run **any Java project folder with multiple classes** from the terminal. This is super handy when working outside any IDE.
+
+Do you want me to do that?

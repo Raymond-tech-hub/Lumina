@@ -2,9 +2,9 @@
     "users": {
         "1": {
             "tree": {
-                "xp": 160,
-                "coins": 120,
-                "stage": "Sapling \ud83c\udf3f",
+                "xp": 560,
+                "coins": 130,
+                "stage": "Mature Tree \ud83c\udf32",
                 "stages": [
                     {
                         "name": "Seedling \ud83c\udf31",

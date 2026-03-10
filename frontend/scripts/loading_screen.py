@@ -10,6 +10,8 @@ from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 from kivy.clock import Clock, mainthread
 from kivy.uix.floatlayout import FloatLayout
+from kivy.clock import Clock
+
 import threading
 import os
 
@@ -29,18 +31,38 @@ kv_files = [
     "frontend/screens/timetable.kv"
 ]
 
-
 class LoadingScreen(MDScreen):
     """Screen that loads KV files in background, then navigates to login."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.dot_state = 0
 
     def on_enter(self):
         #self.relative_image_path = os.path.join(os.path.dirname(__file__), "..", "assets", "loading", "loading_image.jpg")
         #self.ids.loading_image.source = "assets/loading/loading_image.jpg"
+        Clock.schedule_interval(self.animate_dots, 0.5)
+
         self.image_path = "frontend/assets/loading/loading_image.jpg"
         print("Image path exists:", os.path.exists(self.image_path))
         print("LoadingScreen entered")
         self.load_kv()
         
+    def animate_dots(self, dt):
+        # Update loading dots
+        self.dot_state = (self.dot_state + 1) % 4
+        self.ids.loading_text.text = "Loading" + "." * self.dot_state
+
+        # Animate progress bar
+        slider = self.ids.loading_slider
+        if slider.value < slider.max:
+            slider.value += 10  # Increment by 1 per tick
+
+        # Only go to login when slider is full
+        if slider.value >= slider.max:
+            # Stop the interval to prevent repeated calls
+            Clock.unschedule(self.animate_dots)
+            self._go_to_login(0)
+
     def load_kv(self):
         for kv in kv_files:
             try:
@@ -55,7 +77,7 @@ class LoadingScreen(MDScreen):
                 print(f"Error loading {kv}: {e}")
 
         # switch to login on the main thread
-        Clock.schedule_once(self._go_to_login, 1)
+        #Clock.schedule_once(self._go_to_login, 7)
 
     @mainthread
     def _go_to_login(self, dt):

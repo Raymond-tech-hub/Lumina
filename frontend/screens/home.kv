@@ -48,6 +48,11 @@
                 pos_hint: {"x":0.02, "top":0.98}
                 on_release: root.toggle_menu_panel()
 
+            MDLabel:
+                text: root.timer_text
+                font_style: "H3"
+                halign: "center"
+
             # Tree image
             FitImage:
                 id: tree_image
@@ -55,25 +60,49 @@
                 size_hint: 0.5, 0.7
                 pos_hint: {"center_x":0.5, "y":0.1}
 
-            # Coin + XP info horizontally aligned near menu
+            # Coins + XP + Timer row
             MDBoxLayout:
                 orientation: "horizontal"
-                size_hint: 0.35, 0.1  # relative width & height
-                spacing: 0.05
-                pos_hint: {"x":0.12, "top":0.95}
+                size_hint: 0.7, 0.1
+                spacing: dp(20)
+                padding: dp(10)
+                pos_hint: {"x":0.05, "top":0.95}
 
-                # Coins and XP
+                Widget:
+                    size_hint_x: None
+                    width: dp(20)
+
+                # Coins
                 MDLabel:
                     id: coins_label
                     text: root.coins_text
                     font_style: "H6"
+                    size_hint_x: None
+                    #width: self.texture_size[0]
                     color: 1, 0.9, 0, 1
 
+                # XP
                 MDLabel:
                     id: xp_label
                     text: root.xp_text
                     font_style: "H6"
+                    size_hint_x: None
+                    #width: self.texture_size[0]
                     color: 0.5, 1, 0.5, 1
+
+                # Spacer pushes timer right
+                Widget:
+
+                # Timer (top-right)
+                MDLabel:
+                    id: timer_label
+                    text: root.timer_text
+                    font_style: "H6"
+                    bold: True
+                    size_hint_x: None
+                    #width: self.texture_size[0]
+                    halign: "right"
+                    color: 1, 0.6, 0.2, 1
 
             # Tutor icon (bottom-right)
             ImageButton:
@@ -126,6 +155,11 @@
                     text: "About"
                     md_bg_color: app.theme_cls.primary_color
                     on_release: print("About clicked")
+                
+                MDRaisedButton:
+                    text: "Log out"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_release: root.go_login()
 
 
         # ================= FOOTER =================

@@ -49,51 +49,34 @@
             MDBoxLayout:
                 orientation: "vertical"
                 adaptive_height: True
-                size_hint_y: None
-                height: dp(12)
-            
-                MDBoxLayout:
-                    id: graph
-                    orientation: "vertical"
-                    padding: dp(20)
-                    size_hint_y: None
-                    height: dp(250)
+                padding: dp(20)
+                spacing: dp(20)
 
+                MDLabel:
+                    text: "Student Profile"
+                    font_style: "H5"
+                    bold: True
+                    halign: "center"
 
-                    MDLabel:
-                        text: "Profile"
-                        font_style: "H6"
-                        size_hint_y: None
-                        height: self.texture_size[1]
+                MDLabel:
+                    id: username_label
+                    text: "Username: "
+                    halign: "left"
 
-                    ScrollView:
-                        do_scroll_x: False
+                MDLabel:
+                    id: fullname_label
+                    text: "Full Name: "
+                    halign: "left"
 
-                        MDBoxLayout:
-                            orientation: "vertical"
-                            adaptive_height: True
-                            spacing: dp(1)
+                MDLabel:
+                    id: email_label
+                    text: "Email: "
+                    halign: "left"
 
-                            # ---------- Graph screen ----------
-                            MDCard:
-                                size_hint_y: None
-                                height: dp(200)  # card height
-                                radius: dp(12)
-                                elevation: 3
-                                padding: dp(12)
-
-                                MDBoxLayout:
-                                    orientation: "vertical"
-                                    adaptive_height: True
-                                    spacing: dp(8)
-
-                                FitImage:
-                                    source: app.current_graph
-                                    size_hint: None, None
-                                    size: "300dp", "300dp"
-                                    pos_hint: {"center_x": 0.5, "center_y": 0.5}
-                                    allow_stretch: True
-
+                MDLabel:
+                    id: learner_type_label
+                    text: "Learning Style: "
+                    halign: "left"
 
 
         # ============ FOOTER ===========

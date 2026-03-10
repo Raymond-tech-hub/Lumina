@@ -7,11 +7,13 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.card import MDCard
 from kivy.clock import Clock
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.menu import MDDropdownMenu
 
 from backend.ChatBot.chatbot import ChatBot
 from backend.ChatBot.voice import Voice
 from backend.ChatBot.token_simulation import TokenSimulation
 
+import time
 
 global_msg = ''
 
@@ -23,7 +25,48 @@ class ChatBotScreen(MDScreen):
         super().__init__(*args, **kwargs)
         self.Chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
         self.token_sim = TokenSimulation()
+        self.model_mode = "classic"   # classic | llm
+        Clock.schedule_once(self.setup_model_menu)
          
+    def setup_model_menu(self, *args):
+        menu_items = [
+            {
+                "text": "Classic Lumina",
+                'font_name': "C:/Windows/Fonts/seguiemj.ttf",
+                "viewclass": "OneLineListItem",
+                "on_release": lambda x="classic": self.set_model(x)
+            },
+            {
+                "text": "LLM Tutor",
+                'font_name':"C:/Windows/Fonts/seguiemj.ttf",
+                "viewclass": "OneLineListItem",
+                "on_release": lambda x="llm": self.set_model(x)},]
+
+        self.menu = MDDropdownMenu(
+            caller=self.ids.model_icon,
+            items=menu_items,
+            width_mult=4,
+        )
+
+    def set_model(self, model):
+        self.model_mode = model
+        self.menu.dismiss()
+
+        if model == "classic":
+            self.ids.model_icon.icon = "robot"
+            self.add_bot_message("Classic Lumina activated.")
+
+        elif model == "llm":
+            self.ids.model_icon.icon = "brain"
+            self.add_bot_message("LLM Tutor activated.")
+
+    def open_model_menu(self):
+        self.menu.open()
+
+    def action_time(self):
+        current_time = time.strftime('%H:%M:%S')
+        return f"current time is: {current_time}"
+
     def go_back(self):
         print("entering home")
         self.manager.current = "home"
@@ -162,7 +205,19 @@ class ChatBotScreen(MDScreen):
         self.add_user_message(msg)
         self.ids.user_input.text = ""
 
-        response = self.Chatbot.get_response(msg)
+        if self.model_mode == "classic":
+
+            if any(time in msg for time in ["what is the time", "current time"]):
+                response = str(self.action_time())
+            else:
+                response = self.Chatbot.get_response(msg)
+
+        elif self.model_mode == "llm":
+            if self.Chatbot.llm.ready:
+                    result = self.Chatbot.llm.search(msg)
+                    response = result[0] if result else "I couldn't find an answer."
+            else:
+                    response = "⏳ Lumina AI is still loading..."
 
         # 🔥 Add thinking bubble
         thinking_widget = self.add_thinking_bubble()

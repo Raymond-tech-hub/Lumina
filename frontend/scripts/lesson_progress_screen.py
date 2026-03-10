@@ -1,14 +1,20 @@
 import os
 import json
+import time
+from kivymd.uix.snackbar import MDSnackbar
+from kivymd.uix.label import MDLabel
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from kivy.metrics import dp
+from kivy.uix.popup import Popup
 
 class LessonProgressScreen(MDScreen):
     subject_id = None
     topic_id = None
     current_user = None
     user_progress = {}
+    subtopic_start_time = None       # Track start time of each subtopic
+    typical_times = {}  
 
     def load_progress(self):
         """Load user progress from JSON"""
@@ -99,8 +105,41 @@ class LessonProgressScreen(MDScreen):
 
         self.show_subtopic()
 
+    def show_meta_notification(self, title, reason):
+        """Show a temporary AI-style feedback snackbar"""
+        
+        # Create the snackbar instance
+        snackbar = MDSnackbar(
+            duration=3,
+            md_bg_color=(0.1, 0.6, 0.9, 0.95),
+            radius=[15, 15, 15, 15],
+            size_hint_x=0.8,
+            pos_hint={"center_x": 0.5, "bottom": 0.05},
+        )
+        
+        # Add a standard MDLabel as the content
+        content = MDLabel(
+            text=f"[b]{title}[/b]\n{reason}",
+            theme_text_color="Custom",
+            text_color=(1, 1, 1, 1),
+            markup=True, # Allows the [b] bold tags
+            halign="left",
+        )
+        
+        snackbar.add_widget(content)
+        snackbar.open()
+
     def show_subtopic(self):
         sub = self.subtopics[self.subtopic_index]
+
+        # ---------- START TIMER ----------
+        self.subtopic_start_time = time.time()
+
+        # Determine typical reading time for subtopic
+        if sub["text"].startswith("[") and sub["text"].endswith("]"):
+            self.typical_times[self.subtopic_index] = 10  # 40 sec for diagrams
+        else:
+            self.typical_times[self.subtopic_index] = max(10, len(sub["text"]) // 5)
 
         self.ids.lesson_title.text = self.topic["name"]
         self.ids.subtopic_title.text = sub["subtopic"]
@@ -125,6 +164,22 @@ class LessonProgressScreen(MDScreen):
         self.ids.progress_label.text = f"{current} / {total}"
 
     def next_subtopic(self):
+        # ---------- CALCULATE ELAPSED TIME ----------
+        elapsed = time.time() - self.subtopic_start_time
+        typical = self.typical_times.get(self.subtopic_index, 30)
+
+        # Show AI-style feedback
+        if elapsed < typical * 0.5:
+            self.show_meta_notification(
+                "You are moving too fast! ⏩",
+                "Taking more time helps you retain key concepts."
+            )
+        elif elapsed > typical * 2:
+            self.show_meta_notification(
+                "You are moving slowly 🐢",
+                "Consider reviewing the main points to stay on track."
+            )
+        # --------------------------------------------
         # Save progress before moving
         self.save_progress()
 

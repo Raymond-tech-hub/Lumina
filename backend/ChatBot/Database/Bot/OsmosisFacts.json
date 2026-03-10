@@ -3,7 +3,8 @@
             "queries": ["what is osmosis", 
                         "define osmosis",
                         "explain osmosis"],
-            "positive": "Osmosis is the movement of water across a semipermeable membrane."
+            "positive": "Osmosis is the movement of water molecules from a region of high water concentration to a region of low water concentration through a semi-permeable membrane."
+
         },
     
         "definition_membrane": {

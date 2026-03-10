@@ -11,4 +11,3 @@ class Timetable:
         self.classroom = classroom #Different classes 2 West, 2 Gamma etc
         self.teachers = teachers #teachers.json file path 
         
-    def         

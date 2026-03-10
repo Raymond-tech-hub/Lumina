@@ -11,6 +11,7 @@ print("Working directory set to:", os.getcwd())
 
 import sys
 
+
 os.environ["KIVY_NO_ARGS"] = "1"
 bypass_login = False
 default_user_id = None
@@ -40,6 +41,7 @@ from kivy.core.window import Window
 from frontend.scripts.loading_screen import LoadingScreen
 from frontend.scripts.login_screen import LoginScreen
 from frontend.scripts.signup_screen import SignupScreen
+from frontend.scripts.signup_screen import PathSelection
 from frontend.scripts.home_screen import HomeScreen 
 from frontend.scripts.tasks_screen import TasksScreen 
 from frontend.scripts.quiz_screen import QuizScreen
@@ -99,6 +101,7 @@ class LuminaApp(MDApp):
     login_wallpaper = config["Assets"]["login_wallpaper"]
     subject_wallpaper = config["Assets"]["subject_wallpaper"]
     biology_wallpaper = config["Assets"]["biology_wallpaper"]
+    tutor_wallpaper = config["Assets"]["tutor_wallpaper"]
     quiz_wallpaper = "frontend/assets/images/wallpapers/quiz_wallpaper.jpg"
     timetable_wallpaper = "frontend/assets/images/wallpapers/timetable_wallpaper.jpg"   
     mini_quest_wallpaper = config["Assets"]["mini_quest_wallpaper"]
@@ -213,6 +216,7 @@ class LuminaApp(MDApp):
         sm.add_widget(LoadingScreen(name="loading"))
         sm.add_widget(LoginScreen(name="login"))
         sm.add_widget(SignupScreen(name="signup"))
+        sm.add_widget(PathSelection(name='path_selection'))
         sm.add_widget(HomeScreen(name="home"))
         sm.add_widget(TasksScreen(name="tasks"))
         sm.add_widget(ProfileScreen(name='profile'))

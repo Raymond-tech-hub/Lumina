@@ -8,7 +8,8 @@ class Authenticate:
         self.folder = folder
         self.db = db
         self.path = os.path.join(folder, db)
-        self.conn = sqlite3.connect(self.path)
+        #self.conn = sqlite3.connect(self.path)
+        self.conn = sqlite3.connect(self.path, timeout=5)
         self.c = self.conn.cursor() 
         self. ph = PasswordHasher(
             time_cost=3,
@@ -18,26 +19,31 @@ class Authenticate:
             salt_len=16
         )
 
+    def close(self):
+        if self.conn:
+            self.conn.close()
+
     def create_table(self):
         try:
             self.c.execute('''CREATE TABLE  users(
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                username TEXT UINIQUE,
+                                username TEXT UNIQUE,
                                 name TEXT,
                                 email TEXT UNIQUE,
-                                password_hash TEXT NOT NULL
+                                password_hash TEXT NOT NULL,
+                                learner_type TEXT
                         )''')
             
         except sqlite3.OperationalError:
             print(f"{self.db} already exists") 
         self.conn.commit()
 
-    def insert_data(self, username="user123", name="Student 001", email="user123@gmail.com", password="12345678"):
+    def insert_data(self, username="user123", name="Student 001", email="user123@gmail.com", password="12345678", learner_type="gamer"):
         try:
             password_hash = self.ph.hash(password=password)
             self.c.execute(
-                'INSERT INTO users (username, name, email, password_hash) VALUES (?, ?, ?, ?)',
-                (username, name, email, password_hash)
+                'INSERT INTO users (username, name, email, password_hash, learner_type) VALUES (?, ?, ?, ?, ?)',
+                (username, name, email, password_hash, learner_type)
             )
             self.conn.commit()
             print("Inserted data to users table")

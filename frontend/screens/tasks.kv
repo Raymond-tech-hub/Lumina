@@ -1,18 +1,17 @@
-#:import dp kivy.metrics.dp
-
 <TasksScreen>:
     name: 'tasks'
+
     MDBoxLayout:
         orientation: "vertical"
 
         # ================= HEADER =================
         FloatLayout:
             MDBoxLayout:
-                orientation: "horizontal"    # horizontal elements
-                size_hint_y: None            # fixed height
-                height: dp(80)               # header height
+                orientation: "horizontal"
+                size_hint_y: None
+                height: dp(80)
                 padding: dp(10)
-                spacing: dp(20)              # space between items
+                spacing: dp(20)
                 pos_hint: {"top": 1}
                 md_bg_color: app.theme_cls.primary_dark
 
@@ -22,7 +21,7 @@
                     source: app.app_logo2
                     size_hint: None, None
                     size: dp(50), dp(50)
-                    radius: [dp(25)]   # half of width/height → makes it fully round
+                    radius: [dp(25)]
 
                 # App Name
                 MDLabel:
@@ -40,66 +39,72 @@
             MDBoxLayout:
                 orientation: "vertical"
                 adaptive_height: True
-                size_hint_y: None
-                height: dp(12)
-            
-                # ================= DAILY TASKS =================
-                MDBoxLayout:
-                    id: daily_tasks
-                    orientation: "vertical"
-                    padding: dp(20)
-                    size_hint_y: None
-                    height: dp(250)
+                padding: dp(12)
+                spacing: dp(12)
 
+                # ========== CURRENT TASK ==========
+                MDBoxLayout:
+                    id: current_task_box
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: dp(120)
+                    padding: dp(12)
+                    spacing: dp(8)
 
                     MDLabel:
-                        text: "Daily Tasks"
+                        text: "Current Task"
                         font_style: "H6"
                         size_hint_y: None
                         height: self.texture_size[1]
 
+                    MDCard:
+                        id: current_task_card
+                        size_hint_y: None
+                        height: dp(80)
+                        radius: dp(12)
+                        elevation: 3
+                        padding: dp(12)
+
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: dp(20)
+
+                            MDLabel:
+                                id: task_description
+                                text: "Task description here"
+                                font_style: "Subtitle1"
+                                valign: "middle"
+
+                            MDFillRoundFlatButton:
+                                id: claim_button
+                                text: "Claim"
+                                on_release: root.claim_task()
+                                md_bg_color: 0.5, 0.5, 0.5, 1  # Default gray
+
+                # ========== DAILY TASKS PLACEHOLDER ==========
+                MDBoxLayout:
+                    id: daily_tasks
+                    orientation: "vertical"
+                    size_hint_y: None
+                    adaptive_height: True
+                    padding: dp(12)
+                    spacing: dp(12)
+
                     ScrollView:
                         do_scroll_x: False
-
                         MDBoxLayout:
                             orientation: "vertical"
                             adaptive_height: True
-                            spacing: dp(1)
+                            spacing: dp(8)
 
-                            # ---------- Mathematics ----------
+                            # Example daily task card
                             MDCard:
                                 size_hint_y: None
-                                height: dp(200)  # card height
+                                height: dp(80)
                                 radius: dp(12)
-                                elevation: 3
+                                elevation: 2
                                 padding: dp(12)
 
-                                MDBoxLayout:
-                                    orientation: "vertical"
-                                    adaptive_height: True
-                                    spacing: dp(8)
-
-                                    MDLabel:
-                                        text: "Mathematics"
-                                        font_style: "H6"
-                                        theme_text_color: "Primary"
-                                        size_hint_y: None
-                                        height: self.texture_size[1]
-
-                                    MDFillRoundFlatButton:
-                                        text: "Algebra - Linear Equations"
-                                        size_hint_y: None
-                                        #height: self.texture_size[1]
-
-                                    MDFillRoundFlatButton:
-                                        text: "Algebra - Quadratic Equations"
-                                        size_hint_y: None
-                                        #height: self.texture_size[1]
-
-                                    MDFillRoundFlatButton:
-                                        text: "Geometry - Triangles"
-                                        size_hint_y: None
-                                        #height: self.texture_size[1]                    
 
         # ================= FOOTER =================
         MDBoxLayout:
@@ -107,13 +112,10 @@
             orientation: "horizontal"
             size_hint_y: None
             height: dp(80)
-            padding: [dp(60), dp(10), dp(20), dp(10)] # left, top, right, bottom
+            padding: [dp(60), dp(10), dp(20), dp(10)]
             spacing: dp(100)
-            md_bg_color: 0, 0, 0, 0.2   # optional translucent background
-            adaptive_width: True
             pos_hint: {"center_x": 0.5}
             md_bg_color: app.theme_cls.primary_dark
-
 
             ImageButton:
                 source: app.home_icon
@@ -144,5 +146,3 @@
                 size_hint: None, None
                 size: dp(50), dp(50)
                 on_release: root.go_profile() 
-
-                                                
