@@ -1,0 +1,39 @@
+The simplest way to use me is to ask directly for outcomes. For example:
+
+explain this file
+find where login is handled
+fix this bug
+add a new screen for settings
+run the app and tell me why it crashes
+review my changes
+write tests for this module
+clean up this function
+where is the quiz data coming from?
+A good mental model is:
+
+Ask questions when you want understanding.
+Ask for changes when you want implementation.
+Ask for review when you want risks and bugs identified.
+Paste errors when something fails and I’ll trace them.
+A few useful command styles:
+
+Explanation: Explain [main.py](/c:/Users/Tambach%201/Desktop/project/lumina/main.py)
+Search: Find all code related to authentication
+Debugging: Why does main.py fail on startup?
+Refactor: Simplify the logic in home_screen.py
+Build work: Add a logout button to the home screen
+Review: Review my current changes
+Repo help: What does this project do and how do I run it?
+How I usually work:
+
+I inspect the repo first.
+I make reasonable assumptions instead of blocking on small questions.
+If code changes are needed, I usually implement them directly.
+I tell you what I changed and whether I verified it.
+Best first requests for a new user:
+
+Give me a tour of this project
+Explain how main.py connects to the frontend
+Find the most important bugs in this repo
+Help me run this app
+Review the current codebase structure

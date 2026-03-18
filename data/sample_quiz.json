@@ -1,0 +1,47 @@
+{
+  "subjects": {
+    "biology": {
+      "topics": [
+        {
+          "id": "osmosis_101",
+          "title": "Osmosis",
+          "content": [
+            "Osmosis is the diffusion of water molecules through a partially (selectively) permeable membrane.",
+            "Water moves from a region of higher water concentration (dilute solution / low solute) to a region of lower water concentration (concentrated solution / high solute).",
+            "Osmosis is a passive process, no energy is required.",
+            "Key terms:",
+            "- Hypotonic: solution with lower solute concentration than the cell → water enters cell",
+            "- Hypertonic: solution with higher solute concentration than the cell → water leaves cell",
+            "- Isotonic: equal solute concentration → no net water movement",
+            "In plant cells: osmosis creates turgor pressure (important for support). In animal cells: can cause swelling or shrinking."
+          ],
+          "diagram": "osmosis_types.png",
+          "questions": [
+            {
+              "question": "What is osmosis?",
+              "options": [
+                "Movement of any particles from high to low concentration",
+                "Movement of water across a partially permeable membrane from dilute to concentrated solution",
+                "Active transport of solutes using energy",
+                "Movement of gases across the cell membrane"
+              ],
+              "answer": "Movement of water across a partially permeable membrane from dilute to concentrated solution",
+              "hint": "Osmosis is special because it's only about WATER and uses a semi-permeable membrane."
+            },
+            {
+              "question": "In which direction does water move during osmosis?",
+              "options": [
+                "From high solute concentration to low solute concentration",
+                "From low water concentration to high water concentration",
+                "From high water concentration (low solute) to low water concentration (high solute)",
+                "Randomly in both directions equally"
+              ],
+              "answer": "From high water concentration (low solute) to low water concentration (high solute)",
+              "hint": "Water always moves to where there are more solutes (to dilute them)."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

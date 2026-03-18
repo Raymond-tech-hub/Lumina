@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Databases
+*.db
+
+# ML models
+*.pkl
+*.faiss
+*.pt
+
+# User data
+data/user/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Python requirements file
+requirements.txt

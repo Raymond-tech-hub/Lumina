@@ -1,0 +1,124 @@
+<ProfileScreen>:
+    name: 'profile'
+    MDBoxLayout:
+        orientation: "vertical"
+        # ================= HEADER =================
+        FloatLayout:
+            MDBoxLayout:
+                orientation: "horizontal"    # horizontal elements
+                size_hint_y: None            # fixed height
+                height: dp(80)               # header height
+                padding: dp(10)
+                spacing: dp(20)              # space between items
+                pos_hint: {"top": 1}
+                md_bg_color: app.theme_cls.primary_dark
+
+                # Logo
+                FitImage:
+                    id: logo
+                    source: app.app_logo2
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+                    radius: [dp(25)]   # half of width/height → makes it fully round
+
+                # App Name
+                MDLabel:
+                    text: "Lumina"
+                    font_size: dp(36)
+                    bold: True
+                    color: 0.5, 0.93, 1, 1
+                    valign: "middle"
+
+                # Inbox icon
+                ImageButton:
+                    source: app.inbox_icon
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+
+                # Bell icon
+                ImageButton:
+                    source: app.notification_icon
+                    size_hint: None, None
+                    size: dp(50), dp(50)
+
+        # ================= MIDDLE_SECTOR =================
+        ScrollView:
+            do_scroll_x: False
+            size_hint_y: 1
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                padding: dp(20)
+                spacing: dp(20)
+
+                MDLabel:
+                    text: "Student Profile"
+                    font_style: "H5"
+                    bold: True
+                    halign: "center"
+
+                MDLabel:
+                    id: username_label
+                    text: "Username: "
+                    halign: "left"
+
+                MDLabel:
+                    id: fullname_label
+                    text: "Full Name: "
+                    halign: "left"
+
+                MDLabel:
+                    id: email_label
+                    text: "Email: "
+                    halign: "left"
+
+                MDLabel:
+                    id: learner_type_label
+                    text: "Learning Style: "
+                    halign: "left"
+
+
+        # ============ FOOTER ===========
+        MDBoxLayout:
+            id: footer
+            orientation: "horizontal"
+            size_hint_y: None
+            height: dp(80)
+            padding: [dp(60), dp(10), dp(20), dp(10)] # left, top, right, bottom
+            spacing: dp(100)
+            md_bg_color: 0, 0, 0, 0.2   # optional translucent background
+            adaptive_width: True
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_dark
+
+
+            ImageButton:
+                source: app.home_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_home()  
+
+            ImageButton:
+                source: app.task_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_tasks()  
+
+            ImageButton:
+                source: app.leaderboard_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_leaderboard()   
+
+            ImageButton:
+                source: app.quiz_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_quiz()
+
+            ImageButton:
+                source: app.profile_icon
+                size_hint: None, None
+                size: dp(50), dp(50)
+                on_release: root.go_profile() 

@@ -1,0 +1,42 @@
+#:import MDTopAppBar kivymd.uix.appbar.MDTopAppBar
+#:import dp kivy.metrics.dp
+
+BoxLayout:
+    orientation: "vertical"
+
+    MDTopAppBar:
+        elevation: 0                     # clean flat look (change to 4–6 if you want shadow)
+        md_bg_color: 1, 1, 1, 0.08        # subtle glass tint
+        size_hint_y: None
+        height: dp(100)                  # taller so logo + text breathe
+        pos_hint: {"top": 1}
+        radius: [0, 0, dp(32), dp(32)]   # nice rounded bottom corners
+
+        # Left side: Logo + Lumina text
+        left_action_items: []
+
+        MDFloatLayout:
+            # Circular logo
+            FitImage:                       # or AsyncImage / Image
+                source: app.app_logo2        # ← your glowing L logo (set in Python)
+                size_hint: None, None
+                size: dp(52), dp(52)
+                pos_hint: {"center_y": .5}
+                x: dp(18)
+                radius: [dp(26)]             # perfect circle
+
+            # Lumina text
+            MDLabel:
+                text: "Lumina
+                font_size: dp(30)
+                bold: True
+                color: 0.88, 0.93, 1, 1
+                pos_hint: {"center_y": .5}
+                x: dp(84)
+
+            # Hamburger button at the top-left
+            MDIconButton:
+                icon: "menu"            # built-in hamburger icon
+                user_font_size: "36sp"
+                pos_hint: {"top": 1, "x": 0}  # top-left corner
+                on_release: app.open_menu()   # call function when clicked    

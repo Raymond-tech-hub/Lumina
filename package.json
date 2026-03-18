@@ -1,0 +1,14 @@
+{
+  "name": "lumina",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Convenience task runner for the Python-based Lumina project.",
+  "scripts": {
+    "run": "python main.py",
+    "run:bypass": "python main.py --bypass 1",
+    "quiz": "python frontend/quiz/quiz.py",
+    "chatbot": "python backend/ChatBot/main.py",
+    "voice": "python backend/ChatBot/voicechat_screen.py",
+    "test": "pytest"
+  }
+}
