@@ -1,0 +1,13 @@
+kivy
+kivymd==1.2.0
+argon2-cffi
+matplotlib
+numpy
+pandas
+scikit-learn
+joblib
+sentence-transformers
+faiss-cpu
+pyttsx3
+
+

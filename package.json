@@ -4,6 +4,8 @@
   "private": true,
   "description": "Convenience task runner for the Python-based Lumina project.",
   "scripts": {
+    "install": "pip install -r requirements.txt",
+    "install:dev": "pip install -r dev-requirements.txt",
     "run": "python main.py",
     "run:bypass": "python main.py --bypass 1",
     "quiz": "python frontend/quiz/quiz.py",

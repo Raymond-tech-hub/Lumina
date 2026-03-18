@@ -17,5 +17,7 @@ data/user/
 .DS_Store
 Thumbs.db
 
-# Python requirements file
-requirements.txt
+# Test and virtualenv artifacts
+.pytest_cache/
+.venv/
+venv/
