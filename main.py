@@ -37,20 +37,8 @@ from kivy.uix.image import AsyncImage
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.core.window import Window
 
-# Import screens
+# Import only loading screen initially to show UI quickly
 from frontend.scripts.loading_screen import LoadingScreen
-from frontend.scripts.login_screen import LoginScreen
-from frontend.scripts.signup_screen import SignupScreen
-from frontend.scripts.signup_screen import PathSelection
-from frontend.scripts.home_screen import HomeScreen 
-from frontend.scripts.tasks_screen import TasksScreen 
-from frontend.scripts.quiz_screen import QuizScreen
-from frontend.scripts.profile_screen import ProfileScreen
-from frontend.scripts.chatbot_screen import ChatBotScreen
-from frontend.scripts.lesson_screen import LessonScreen
-from frontend.scripts.lesson_screen import TopicRoadmapScreen
-from frontend.scripts.lesson_progress_screen import LessonProgressScreen
-from frontend.scripts.quiz_engine import MiniQuestScreen
 
 from kivy.core.audio import SoundLoader
 from time import sleep
@@ -115,8 +103,9 @@ class LuminaApp(MDApp):
         if self.bypass_login and self.default_user_id:
             print(f"Bypass active: logging in as user {self.default_user_id}")
             self.load_user_graphs(self.default_user_id)
-            # Skip login screen, go straight to home
-            self.root.current = "home"
+
+        from kivy.clock import Clock
+        Clock.schedule_once(self.load_screens_after_loading, 0.2)
 
     def start_background_music(self):
         def play_music():
@@ -126,16 +115,52 @@ class LuminaApp(MDApp):
                 sound.loop = True
                 sound.play()
                 print("Background music playing...")
-                # Keep thread alive while app is running
                 while True:
                     from time import sleep
                     sleep(1)
             else:
                 print("Sound file not found!")
 
-        # Start the music in a separate thread
         music_thread = threading.Thread(target=play_music, daemon=True)
         music_thread.start()
+
+    def load_screens_after_loading(self, *args):
+        # Import and register app screens after initial loading UI is shown
+        from frontend.scripts.login_screen import LoginScreen
+        from frontend.scripts.signup_screen import SignupScreen, PathSelection
+        from frontend.scripts.home_screen import HomeScreen
+        from frontend.scripts.tasks_screen import TasksScreen
+        from frontend.scripts.quiz_screen import QuizScreen
+        from frontend.scripts.profile_screen import ProfileScreen
+        from frontend.scripts.chatbot_screen import ChatBotScreen
+        from frontend.scripts.lesson_screen import LessonScreen, TopicRoadmapScreen
+        from frontend.scripts.lesson_progress_screen import LessonProgressScreen
+        from frontend.scripts.quiz_engine import MiniQuestScreen
+
+        screens = [
+            (LoginScreen, 'login'),
+            (SignupScreen, 'signup'),
+            (PathSelection, 'path_selection'),
+            (HomeScreen, 'home'),
+            (TasksScreen, 'tasks'),
+            (ProfileScreen, 'profile'),
+            (QuizScreen, 'quiz'),
+            (ChatBotScreen, 'tutor'),
+            (LessonScreen, 'lesson'),
+            (TopicRoadmapScreen, 'topic_roadmap'),
+            (LessonProgressScreen, 'lesson_progress'),
+            (MiniQuestScreen, 'miniquest'),
+        ]
+
+        for screen_class, name in screens:
+            if not self.root.has_screen(name):
+                try:
+                    self.root.add_widget(screen_class(name=name))
+                except Exception as e:
+                    print(f"Error adding {name}: {e}")
+
+        if self.bypass_login and self.default_user_id:
+            self.root.current = 'home'
 
     current_user = None
     graphs = []
@@ -210,26 +235,12 @@ class LuminaApp(MDApp):
             else:
                 print(f"loading.kv does not exist: {self.loading_kivy_path}")
         except Exception as e:
-            print("Error loading \'loading.kv\': {e}")
+            print("Error loading 'loading.kv':", e)
 
-        # Adding loading screen first, then others
         sm.add_widget(LoadingScreen(name="loading"))
-        sm.add_widget(LoginScreen(name="login"))
-        sm.add_widget(SignupScreen(name="signup"))
-        sm.add_widget(PathSelection(name='path_selection'))
-        sm.add_widget(HomeScreen(name="home"))
-        sm.add_widget(TasksScreen(name="tasks"))
-        sm.add_widget(ProfileScreen(name='profile'))
-        sm.add_widget(QuizScreen(name="quiz"))
-        sm.add_widget(ChatBotScreen(name="tutor"))
-        sm.add_widget(LessonScreen(name="lesson"))
-        sm.add_widget(TopicRoadmapScreen(name='topic_roadmap'))
-        sm.add_widget(LessonProgressScreen(name="lesson_progress"))
-        sm.add_widget(MiniQuestScreen(name="miniquest"))
-
         sm.current = "loading"
+        return sm
 
-        return sm  
 
 class ImageButton(ButtonBehavior, AsyncImage):
     pass

@@ -22,8 +22,11 @@ class LLM:
 
         self.vd = None
         self.ready = False
+        self.thread = None
 
-        # Start background loading
+    def load(self):
+        if self.thread and self.thread.is_alive():
+            return
         self.thread = threading.Thread(target=self._load_model, daemon=True)
         self.thread.start()
 
@@ -38,6 +41,7 @@ class LLM:
                 model=self.model
             )
 
+            self.vd.load_model()
             self.vd.load_index()
 
             self.ready = True
@@ -54,11 +58,15 @@ class LLM:
 
 class ChatBot:
     def __init__(self, name, response_file, fact_file):
-        self.llm = LLM()
-        #self.llm.load_index()
+        self.llm = None
         self.name = name
         self.response_file = response_file
         self.fact_file = fact_file
+
+    def init_llm(self):
+        if self.llm is None:
+            self.llm = LLM()
+            self.llm.load()
         self.greetings = ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "howdy", "how are you"]
         self.help = f"""
 Welcome to Lumina 

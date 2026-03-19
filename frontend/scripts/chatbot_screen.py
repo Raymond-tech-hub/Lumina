@@ -59,6 +59,7 @@ class ChatBotScreen(MDScreen):
         elif model == "llm":
             self.ids.model_icon.icon = "brain"
             self.add_bot_message("LLM Tutor activated.")
+            self.Chatbot.init_llm()
 
     def open_model_menu(self):
         self.menu.open()
@@ -213,11 +214,14 @@ class ChatBotScreen(MDScreen):
                 response = self.Chatbot.get_response(msg)
 
         elif self.model_mode == "llm":
-            if self.Chatbot.llm.ready:
-                    result = self.Chatbot.llm.search(msg)
-                    response = result[0] if result else "I couldn't find an answer."
+            if self.Chatbot.llm is None:
+                self.Chatbot.init_llm()
+                response = "⏳ Lumina AI is initializing..."
+            elif self.Chatbot.llm.ready:
+                result = self.Chatbot.llm.search(msg)
+                response = result[0] if result else "I couldn't find an answer."
             else:
-                    response = "⏳ Lumina AI is still loading..."
+                response = "⏳ Lumina AI is still loading..."
 
         # 🔥 Add thinking bubble
         thinking_widget = self.add_thinking_bubble()

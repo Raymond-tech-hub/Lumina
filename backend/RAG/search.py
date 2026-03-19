@@ -9,12 +9,18 @@ class VectorDatabase:
     def __init__(self, index_file="database/vector_index.faiss", sentences_file="database/sentences.pt",
                  database="database/training_data_intent_aware.json", model="model/sbert_minilm"):
         self.database = database
-        self.model = SentenceTransformer(str(Path(model).resolve()))
+        self.model_path = model
+        self.model = None
         self.data = None
         self.embeddings = None
         self.index = None
         self.index_file = index_file
         self.sentences_file = sentences_file
+
+    def load_model(self):
+        if self.model is None:
+            self.model = SentenceTransformer(str(Path(self.model_path).resolve()))
+            print(f"Loaded semantic model: {self.model_path}")
 
     # Load dataset
     def load_data(self):
@@ -27,6 +33,8 @@ class VectorDatabase:
 
     # Convert dataset to embeddings
     def convert_to_embeddings(self):
+        if self.model is None:
+            self.load_model()
         self.embeddings = self.model.encode(self.data, convert_to_numpy=True)
         faiss.normalize_L2(self.embeddings)
         return self.embeddings
@@ -65,6 +73,8 @@ class VectorDatabase:
 
     # Search query
     def search(self, query, top_k=5):
+        if self.model is None:
+            self.load_model()
         query_embedding = self.model.encode([query], convert_to_numpy=True)
         faiss.normalize_L2(query_embedding)
         D, I = self.index.search(query_embedding, top_k)

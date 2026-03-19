@@ -7,17 +7,29 @@ class Authenticate:
     def __init__(self, db, folder):
         self.folder = folder
         self.db = db
+        os.makedirs(folder, exist_ok=True)
         self.path = os.path.join(folder, db)
-        #self.conn = sqlite3.connect(self.path)
         self.conn = sqlite3.connect(self.path, timeout=5)
-        self.c = self.conn.cursor() 
-        self. ph = PasswordHasher(
+        self.c = self.conn.cursor()
+        self.ph = PasswordHasher(
             time_cost=3,
             memory_cost=1000,
             parallelism=2,
             hash_len=32,
             salt_len=16
         )
+
+    def create_user_folder(self, user_id):
+        user_folder = os.path.join(self.folder, str(user_id))
+        folders = [
+            user_folder,
+            os.path.join(user_folder, "lesson_images"),
+            os.path.join(user_folder, "progress"),
+            os.path.join(user_folder, "subjects")
+        ]
+        for folder in folders:
+            os.makedirs(folder, exist_ok=True)
+        return user_folder
 
     def close(self):
         if self.conn:
@@ -46,26 +58,27 @@ class Authenticate:
                 (username, name, email, password_hash, learner_type)
             )
             self.conn.commit()
-            print("Inserted data to users table")
+            user_id = self.c.lastrowid
+            self.create_user_folder(user_id)
+            print(f"Inserted data to users table and created folder for user {user_id}")
             return True
         except sqlite3.IntegrityError as e:
-            print("Insert failed:", e) 
+            print("Insert failed:", e)
             return False
 
     def verify_user(self, email, password):
         self.c.execute("SELECT id, password_hash FROM users WHERE email = ?", (email,))
         row = self.c.fetchone()
-        
-        if not row:
-            return None  # No user found
-        
-        user_id, stored_hash = row
 
+        if not row:
+            return None
+
+        user_id, stored_hash = row
         try:
             if self.ph.verify(stored_hash, password):
-                return user_id  # Return actual user id
-            else:
-                return None
+                self.create_user_folder(user_id)
+                return user_id
+            return None
         except VerifyMismatchError:
             return None
 
@@ -89,4 +102,4 @@ if __name__ == "__main__":
     auth = Authenticate(folder=folder, db=db)    
 
     auth.run()
-    auth.insert_data(username="Diamond", name="Diamond Heart", email="d", password="1")
+    auth.insert_data(username="Diamond", name="Diamond Heart", email="d", password="d")
