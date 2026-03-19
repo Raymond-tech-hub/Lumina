@@ -3,7 +3,7 @@ __pycache__/
 *.pyc
 
 # Databases
-*.db
+#*.db
 
 # ML models
 *.pkl
@@ -11,7 +11,7 @@ __pycache__/
 *.pt
 
 # User data
-data/user/
+#data/user/
 
 # OS junk
 .DS_Store

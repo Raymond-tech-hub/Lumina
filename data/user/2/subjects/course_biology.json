@@ -1,0 +1,122 @@
+
+{
+  "subject": {
+    "id": "biology",
+    "name": "Biology",
+    "emoji": "🌿",
+    "description": "Study of living organisms, their structure, function, and interactions within ecosystems.",
+    "class": "Form 2",
+    "syllabus": "KLB",
+    "hint_limit": 3
+  },
+  "topics": [
+    {
+      "id": "osmosis",
+      "name": "Mission 1: Osmosis – Water Transport Across Membranes",
+      "short_description": "Mechanism of water movement across semi-permeable membranes",
+      "content": [
+        {
+          "subtopic": "QUESTION",
+          "text": "Why do skin cells wrinkle in prolonged water exposure? This is due to osmotic water movement causing cell volume changes, optimizing grip function in wet conditions."
+        },
+        {
+          "subtopic": "EXPLANATION",
+          "text": "Water molecules move from regions of high water potential to low water potential across semi-permeable membranes. This process occurs naturally to equalize solute concentrations on either side of the membrane."
+        },
+        {
+          "subtopic": "CORE CONCEPT",
+          "text": "Osmosis is the passive diffusion of water molecules through a semi-permeable membrane, critical for maintaining turgor pressure in plant cells and homeostasis in animal cells."
+        },
+        {
+          "subtopic": "MEMORIZATION AID",
+          "text": "H2L: Water moves from high to low concentration. Visualize it as water 'flowing downhill' through a membrane."
+        },
+        {
+          "subtopic": "BIOLOGICAL IMPORTANCE",
+          "text": "Maintains turgor in plant cells, preventing wilting, and regulates hydration and electrolyte balance in animal cells."
+        },
+        {
+          "subtopic": "APPLICATION",
+          "text": "In hypertonic solutions, plant cells lose water and plasmolyze; in hypotonic solutions, cells gain water and become turgid. Practical experiments demonstrate osmotic principles."
+        },
+        {
+          "subtopic": "EXERCISE",
+          "text": "Predict the response of a plant cell in pure water versus saline solution using osmotic principles."
+        }
+      ],
+      "diagram": "osmosis.png"
+    },
+    {
+      "id": "photosynthesis",
+      "name": "Mission 2: Photosynthesis – Solar Energy Conversion",
+      "short_description": "Biochemical process by which plants synthesize organic compounds from light energy",
+      "content": [
+        {
+          "subtopic": "INTRODUCTION",
+          "text": "Plants synthesize glucose from carbon dioxide and water using light energy captured by chlorophyll."
+        },
+        {
+          "subtopic": "MECHANISM",
+          "text": "Light-dependent reactions convert solar energy into chemical energy (ATP, NADPH); light-independent reactions fix CO2 into glucose via the Calvin cycle."
+        },
+        {
+          "subtopic": "CORE CONCEPT",
+          "text": "Photosynthesis equation: 6CO2 + 6H2O + light energy → C6H12O6 + 6O2"
+        },
+        {
+          "subtopic": "MEMORIZATION AID",
+          "text": "6-6 makes 1-6: 6 CO2 + 6 H2O → 1 Glucose + 6 O2"
+        },
+        {
+          "subtopic": "CELLULAR LOCATION",
+          "text": "Occurs in chloroplasts of plant cells."
+        },
+        {
+          "subtopic": "APPLICATION",
+          "text": "Without sunlight, photosynthesis ceases, halting glucose production and oxygen release."
+        },
+        {
+          "subtopic": "DIAGRAM",
+          "text": "photosynthesis.png"
+        }
+      ],
+      "diagram": "photosynthesis.png"
+    },
+    {
+      "id": "respiration",
+      "name": "Mission 3: Cellular Respiration – Energy Extraction",
+      "short_description": "Process by which cells convert glucose into usable chemical energy (ATP)",
+      "content": [
+        {
+          "subtopic": "INTRODUCTION",
+          "text": "Cells metabolize glucose to produce ATP, which fuels cellular functions."
+        },
+        {
+          "subtopic": "MECHANISM",
+          "text": "Glucose is oxidized in the presence of oxygen within mitochondria, releasing energy, carbon dioxide, and water."
+        },
+        {
+          "subtopic": "CORE CONCEPT",
+          "text": "Cellular respiration equation: C6H12O6 + 6O2 → 6CO2 + 6H2O + ATP"
+        },
+        {
+          "subtopic": "MEMORIZATION AID",
+          "text": "Respiration is the biochemical opposite of photosynthesis."
+        },
+        {
+          "subtopic": "CELLULAR LOCATION",
+          "text": "Occurs in mitochondria, the cell’s energy organelles."
+        },
+        {
+          "subtopic": "APPLICATION",
+          "text": "During intense activity, increased respiration rate supplies additional ATP, explaining rapid breathing in athletes."
+        },
+        {
+          "subtopic": "DIAGRAM",
+          "text": "respiration.png"
+        }
+      ],
+      "diagram": "respiration.png"
+    }
+  ]
+}
