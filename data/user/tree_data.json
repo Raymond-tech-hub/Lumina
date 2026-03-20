@@ -2,7 +2,7 @@
     "users": {
         "1": {
             "tree": {
-                "xp": 560,
+                "xp": 605,
                 "coins": 130,
                 "stage": "Mature Tree \ud83c\udf32",
                 "stages": [
@@ -71,8 +71,8 @@
         },
         "5": {
             "tree": {
-                "xp": 110,
-                "coins": 0,
+                "xp": 130,
+                "coins": 5,
                 "stage": "Sapling \ud83c\udf3f",
                 "stages": [
                     {

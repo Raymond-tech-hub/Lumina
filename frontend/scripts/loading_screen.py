@@ -5,21 +5,22 @@ switches to the 'login' screen on the main thread when done.
 
 """
 
-from tkinter import Image
+
 from kivymd.uix.screen import MDScreen
 from kivy.lang import Builder
 from kivy.clock import Clock, mainthread
-from kivy.uix.floatlayout import FloatLayout
-from kivy.clock import Clock
 
 import threading
 import os
 
 
-kv_files = [
+main_kv_files = [
     "frontend/screens/login.kv",
     "frontend/screens/signup.kv",
-    "frontend/screens/home.kv",
+    "frontend/screens/home.kv"   
+]
+
+secondary_kv_files = [
     "frontend/screens/lesson.kv",
     "frontend/screens/quiz.kv",
     "frontend/screens/tasks.kv",
@@ -63,7 +64,7 @@ class LoadingScreen(MDScreen):
             self._go_to_login(0)
 
     def load_kv(self):
-        for kv in kv_files:
+        for kv in main_kv_files:
             try:
                 path = kv
                 if os.path.exists(path):

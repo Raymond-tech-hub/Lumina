@@ -13,7 +13,7 @@ class LLM:
                  index_file="backend/RAG/database/vector_index.faiss",
                  sentences_file="backend/RAG/database/sentences.pt",
                  database="backend/RAG/database/training_data_intent_aware.json",
-                 model="backend/RAG/model/sbert_minilm"):
+                 model="backend/RAG/model/LuminaV01"):
 
         self.index_file = index_file
         self.sentences_file = sentences_file
@@ -62,6 +62,11 @@ class ChatBot:
         self.name = name
         self.response_file = response_file
         self.fact_file = fact_file
+        self.greetings = ["hello", "hi", "hey", "greetings", "good morning", "good afternoon", "howdy", "how are you"]
+        self.help =  None
+        self.topics =  None
+        self.navigation_help = None
+        self.daily_summary = None
 
     def init_llm(self):
         if self.llm is None:

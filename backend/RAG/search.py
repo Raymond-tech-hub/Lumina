@@ -7,7 +7,7 @@ from pathlib import Path
 
 class VectorDatabase:
     def __init__(self, index_file="database/vector_index.faiss", sentences_file="database/sentences.pt",
-                 database="database/training_data_intent_aware.json", model="model/sbert_minilm"):
+                 database="database/training_data_intent_aware.json", model="model/LuminaV01"):
         self.database = database
         self.model_path = model
         self.model = None
