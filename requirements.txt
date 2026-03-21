@@ -9,5 +9,8 @@ joblib
 sentence-transformers
 faiss-cpu
 pyttsx3
+pygame
+SpeechRecognition
+pyaudio
 
 
