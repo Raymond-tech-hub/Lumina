@@ -1,3 +1,4 @@
+from kivymd import app
 from kivymd.uix.screen import MDScreen
 from kivy.clock import Clock
 from kivy.animation import Animation
@@ -23,11 +24,12 @@ class HomeScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.user_tree = None
+        self.app = MDApp.get_running_app()
 
     def on_enter(self, *args):
         print("entered home screen")
-        app = MDApp.get_running_app()
-        self.current_user = app.current_user
+        
+        self.current_user = self.app.current_user
 
         # Initialize user's tree
         self.user_tree = Tree(self.current_user)
@@ -179,35 +181,35 @@ class HomeScreen(MDScreen):
             anim.start(logo)
 
     def go_home(self):
-        self.manager.current = "home"
+        self.app.switch_to("home")
 
     def go_profile(self):
         print("entering profile")
-        self.manager.current = "profile"
+        self.app.switch_to("profile")
 
     def go_tasks(self):
         print("entering tasks")
-        self.manager.current = "tasks"
+        self.app.switch_to("tasks")
 
     def go_quiz(self):
         print("entering quiz")
-        self.manager.current = "quiz"
+        self.app.switch_to("quiz")
 
     def go_leaderboard(self):
         print("entering leaderboard")
-        self.manager.current = "leaderboard"
+        self.app.switch_to("leaderboard")
 
     def go_tutor(self):
         print("entering tutor")
-        self.manager.current = "tutor"
+        self.app.switch_to("tutor")
 
     def go_lesson(self):
         print("entering lesson")
-        self.manager.current = "lesson"
+        self.app.switch_to("lesson")
 
     def go_login(self):
         print("entering login")
-        self.manager.current = "login"
+        self.app.switch_to("login")
 
 '''def start_logo_pulse(self, dt):
         logo = self.ids.logo

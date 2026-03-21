@@ -1,5 +1,6 @@
 #frontend/scripts/LoginScreen.py
 
+from flask import app
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
 from backend.authenticaion import Authenticate
@@ -8,6 +9,10 @@ import os
 import sqlite3
 
 class LoginScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.app = MDApp.get_running_app()
+
     def on_enter(self):
         print("Login screen entered")
 
@@ -24,9 +29,10 @@ class LoginScreen(MDScreen):
             if user_id :
                 print("Login successful!")
                 # Set the app's current user
-                app = MDApp.get_running_app()
-                app.load_user_graphs(user_id)  # loads graphs & sets current_user
-                self.manager.current = "home"
+                self.app.current_user = user_id
+                print(f"Current user set to: {self.app.current_user}")
+                self.app.switch_to("home")
+                
             else:
                 self.ids.password_field.error = True
                 self.ids.password_field.helper_text = "Incorrect email or password"
@@ -36,7 +42,7 @@ class LoginScreen(MDScreen):
                 print("from login screen: OperationalError, created users table!!!!!")
 
     def switch_to_signup(self):
-        self.manager.current = "signup"
+        self.app.switch_to("signup")
 
     def validate_email(self, email):
         pattern = r'[\w.-]+@[\w.-]+\.\w+'
