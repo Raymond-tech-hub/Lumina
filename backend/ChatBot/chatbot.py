@@ -42,9 +42,14 @@ class LLM:
             )
 
             self.vd.load_model()
-            self.vd.load_index()
-
+            try:
+                self.vd.load_index()
+            except FileNotFoundError:
+                print("[INFO] Index not found, building new one...")
+                self.vd.prepare_index()
+                
             self.ready = True
+                
             print("Lumina semantic engine ready!")
 
         except Exception as e:

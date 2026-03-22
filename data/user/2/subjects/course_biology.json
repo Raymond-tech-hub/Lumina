@@ -12,7 +12,7 @@
   "topics": [
     {
       "id": "osmosis",
-      "name": "Mission 1: Osmosis – Water Transport Across Membranes",
+      "name": "Mission 1: Osmosis - Water Transport Across Membranes",
       "short_description": "Mechanism of water movement across semi-permeable membranes",
       "content": [
         {
@@ -48,7 +48,7 @@
     },
     {
       "id": "photosynthesis",
-      "name": "Mission 2: Photosynthesis – Solar Energy Conversion",
+      "name": "Mission 2: Photosynthesis - Solar Energy Conversion",
       "short_description": "Biochemical process by which plants synthesize organic compounds from light energy",
       "content": [
         {
@@ -84,7 +84,7 @@
     },
     {
       "id": "respiration",
-      "name": "Mission 3: Cellular Respiration – Energy Extraction",
+      "name": "Mission 3: Cellular Respiration - Energy Extraction",
       "short_description": "Process by which cells convert glucose into usable chemical energy (ATP)",
       "content": [
         {
@@ -105,7 +105,7 @@
         },
         {
           "subtopic": "CELLULAR LOCATION",
-          "text": "Occurs in mitochondria, the cell’s energy organelles."
+          "text": "Occurs in mitochondria, the cell's energy organelles."
         },
         {
           "subtopic": "APPLICATION",

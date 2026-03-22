@@ -66,11 +66,16 @@ class VectorDatabase:
             self.data = pickle.load(f)
 
     def prepare_index(self):
+        if os.path.exists(self.index_file) and os.path.exists(self.sentences_file):
+            print("[INFO] Index exists, loading...")
+            self.load_index()
+            return
+        
+        # Otherwise build new index
         self.load_data()
         self.convert_to_embeddings()
         self.build_index()
         self.save_index()
-
     # Search query
     def search(self, query, top_k=5):
         if self.model is None:

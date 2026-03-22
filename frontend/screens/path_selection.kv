@@ -1,0 +1,66 @@
+#:import dp kivy.metrics.dp
+
+<Path_selectionScreen>:
+    name: "path_selection"
+
+    Image:
+        source: app.login_wallpaper  
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 1
+        pos_hint: {"x": 0, "y": 0}
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: dp(20)
+        spacing: dp(20)
+
+        # Header
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(80)
+            MDIconButton:
+                icon: "arrow-left"
+                on_release: root.manager.current = "signup"
+            MDLabel:
+                text: "Select Learning Path"
+                font_style: "H5"
+                halign: "center"
+
+        # Path selection
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: dp(20)
+            size_hint_y: None
+            height: dp(300)
+
+            MDLabel:
+                text: "Choose your learning style:"
+                halign: "center"
+                font_style: "H6"
+
+            MDRaisedButton:
+                text: "Gamer"
+                on_release: root.select_path("gamer")
+                size_hint_x: 0.8
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Academic"
+                on_release: root.select_path("academic")
+                size_hint_x: 0.8
+                pos_hint: {"center_x": 0.5}
+
+            MDRaisedButton:
+                text: "Professional"
+                on_release: root.select_path("professional")
+                size_hint_x: 0.8
+                pos_hint: {"center_x": 0.5}
+
+        # Confirm button
+        MDFillRoundFlatButton:
+            text: "Confirm & Sign Up"
+            on_release: root.try_signup()
+            size_hint_x: 0.8
+            pos_hint: {"center_x": 0.5}
+            md_bg_color: app.theme_cls.primary_color

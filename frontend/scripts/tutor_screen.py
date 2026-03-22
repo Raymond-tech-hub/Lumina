@@ -20,33 +20,41 @@ global_msg = ''
 db="backend/ChatBot/Database/Bot/response.json"
 fact_file="backend/ChatBot/Database/Bot/OsmosisFacts.json"
 
-class ChatBotScreen(MDScreen):
+class TutorScreen(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.Chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
         self.token_sim = TokenSimulation()
         self.model_mode = "classic"   # classic | llm
-        Clock.schedule_once(self.setup_model_menu)
+
+    def on_enter(self):
+        if not hasattr(self, "menu"):
+            self.setup_model_menu()
          
     def setup_model_menu(self, *args):
-        menu_items = [
-            {
-                "text": "Classic Lumina",
-                'font_name': "C:/Windows/Fonts/seguiemj.ttf",
-                "viewclass": "OneLineListItem",
-                "on_release": lambda x="classic": self.set_model(x)
-            },
-            {
-                "text": "LLM Tutor",
-                'font_name':"C:/Windows/Fonts/seguiemj.ttf",
-                "viewclass": "OneLineListItem",
-                "on_release": lambda x="llm": self.set_model(x)},]
+        if "model_icon" not in self.ids:
+            print("[ERROR] model_icon not found in ids")
+        else:            
+            print("[INFO] model_icon found, setting up menu")
+            
+            menu_items = [
+                {
+                    "text": "Classic Lumina",
+                    'font_name': "C:/Windows/Fonts/seguiemj.ttf",
+                    "viewclass": "OneLineListItem",
+                    "on_release": lambda x="classic": self.set_model(x)
+                },
+                {
+                    "text": "LLM Tutor",
+                    'font_name':"C:/Windows/Fonts/seguiemj.ttf",
+                    "viewclass": "OneLineListItem",
+                    "on_release": lambda x="llm": self.set_model(x)},]
 
-        self.menu = MDDropdownMenu(
-            caller=self.ids.model_icon,
-            items=menu_items,
-            width_mult=4,
-        )
+            self.menu = MDDropdownMenu(
+                caller=self.ids.model_icon,
+                items=menu_items,
+                width_mult=4,
+            )
 
     def set_model(self, model):
         self.model_mode = model

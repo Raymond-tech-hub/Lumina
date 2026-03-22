@@ -1,5 +1,13 @@
 import os
+
+'''abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)          
+print("Working directory set to:", os.getcwd())'''
+
 import json
+import importlib
+
 from kivymd.app import MDApp
 from kivymd.uix.screenmanager import ScreenManager
 from kivy.uix.behaviors import ButtonBehavior
@@ -10,7 +18,8 @@ PRIMARY_KV = [
     "frontend/screens/loading.kv",
     "frontend/screens/login.kv",
     "frontend/screens/signup.kv",
-    "frontend/screens/home.kv"
+    "frontend/screens/home.kv",
+    "frontend/screens/tutor.kv"
 ]
 
 class LuminaApp(MDApp):
@@ -21,6 +30,25 @@ class LuminaApp(MDApp):
         self.config = {}           # Will hold config.json
         self.cached_screens = {}   # Screen cache
         self.screen_manager = None
+        self.graphs = []
+        self.current_id = 0
+        self.current_graph = None
+
+    def lazy_load_screen(self, screen_name):
+        """Load any other screen lazily."""
+        app = MDApp.get_running_app()
+        if screen_name in app.cached_screens:
+            return app.cached_screens[screen_name]
+
+        mod_name = f"frontend.scripts.{screen_name.lower()}_screen"
+        mod = importlib.import_module(mod_name)
+        class_name = "".join([word.capitalize() for word in screen_name.split("_")]) + "Screen"
+        cls = getattr(mod, class_name)
+        screen = cls(name=screen_name)
+        app.cached_screens[screen_name] = screen
+        if app.screen_manager:
+            app.screen_manager.add_widget(screen)
+        return screen
 
     def build(self):
         # Theme
@@ -78,6 +106,54 @@ class LuminaApp(MDApp):
         """Switch screens using cache."""
         self.add_screen(screen_name)
         self.screen_manager.current = screen_name
+
+    def load_user_graphs(self, user_id):
+        self.current_user = str(user_id)  # store current user
+        user_folder = os.path.join("data/user", self.current_user)
+
+        if not os.path.exists(user_folder):
+            print(f"No folder for user {self.current_user}")
+            self.graphs = []
+            self.current_graph = None
+            return
+
+        self.graphs = [f for f in os.listdir(user_folder) if f.lower().endswith(".png")]
+        self.current_id = 0
+
+        if self.graphs:
+            self.current_graph = os.path.join(user_folder, self.graphs[0])
+            # Update home screen if loaded
+            try:
+                home_screen = self.screen_manager.get_screen("home")
+                home_screen.ids.graph_image.source = self.current_graph
+                home_screen.ids.graph_image.reload()
+            except Exception as e:
+                print("Home screen not ready yet:", e)
+        else:
+            self.current_graph = None
+
+        print(f"User {self.current_user} graphs loaded: {self.graphs}")
+
+    def graph_back(self):
+        if self.current_id > 0:
+            self.current_id -= 1
+            self.update_graph_image()
+
+    def graph_forward(self):
+        if self.current_id < len(self.graphs) - 1:
+            self.current_id += 1
+            self.update_graph_image()
+
+    def update_graph_image(self):
+        if not self.graphs:
+            print("No graphs to display")
+            return
+
+        home_screen = self.screen_manager.get_screen("home")
+        home_screen.ids.graph_image.source = os.path.join(
+            "data/user", self.current_user, self.graphs[self.current_id]
+        )
+        home_screen.ids.graph_image.reload()
 
 
 class ImageButton(ButtonBehavior, AsyncImage):

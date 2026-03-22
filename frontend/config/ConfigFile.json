@@ -39,8 +39,8 @@
     },
 
     "Sounds": {
-        "theme1": "frontend/assets/sounds/theme1.mp3",
-        "theme2": "frontend/assets/sounds/theme2.mp3"
+        "theme1": "frontend/assets/audio/theme1.mp3",
+        "theme2": "frontend/assets/audio/theme2.mp3"
     }
 
 }
