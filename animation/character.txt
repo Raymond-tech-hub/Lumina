@@ -1,0 +1,13 @@
+Core Abilities:
+1. Water Pulse (Primary Tool)
+Shoots a water projectile
+Expands/shrinks targets
+2. Salt Burst
+Opposite effect
+Used for shrinking enemies
+3. Enzyme Shot
+Clears obstacles
+Breaks “waste blocks”
+4. Osmotic Shield (Cooldown Ability)
+Temporary immunity
+Visual: glowing bubble
