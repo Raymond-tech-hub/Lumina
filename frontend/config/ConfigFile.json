@@ -16,8 +16,14 @@
         "leaderboard_icon": "frontend/assets/images/icons/leaderboard.png",
         "menu_icon": "frontend/assets/images/icons/menu.png",
         "quiz_icon": "frontend/assets/images/icons/quiz.png",
-        "tree_image": "frontend/assets/images/icons/tree_image.jpeg",
+        "tree_image": "frontend/assets/images/icons/tree_placeholder.png",
         "tutor_logo": "frontend/assets/images/icons/tutor_logo.png",
+
+        "store_icon": "frontend/assets/icons/store_icon.png",
+        "manure_icon": "frontend/assets/icons/manure_icon.png",
+        "hose_icon": "frontend/assets/icons/hose_icon.png",
+        "fertilizer1_icon": "frontend/assets/icons/fertilizer1_icon.png",
+        "fertilizer2_icon": "frontend/assets/icons/fertilizer1_icon.png",
 
         "login_wallpaper": "frontend/assets/images/wallpapers/login_wallpaper.jpg",
         "subject_wallpaper": "frontend/assets/images/wallpapers/subject_wallpaper.jpeg",

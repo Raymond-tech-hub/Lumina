@@ -41,77 +41,108 @@
             id: middle_sector
             size_hint_y: 0.75  # 75% of screen height
 
-            # Menu icon (top-left)
+            # ---------- MENU ICON (top-left) ----------
             ImageButton:
                 source: app.menu_icon
-                size_hint: 0.08, 0.12  # relative to middle sector
+                size_hint: 0.08, 0.12
                 pos_hint: {"x":0.02, "top":0.98}
                 on_release: root.toggle_menu_panel()
 
+            # ---------- TIMER LABEL (top-center) ----------
             MDLabel:
                 text: root.timer_text
                 font_style: "H3"
                 halign: "center"
+                pos_hint: {"center_x": 0.5, "top": 0.95}
 
-            # Tree image
-            FitImage:
-                id: tree_image
-                source: root.tree_image_source
-                size_hint: 0.5, 0.7
-                pos_hint: {"center_x":0.5, "y":0.1}
-
-            # Coins + XP + Timer row
-            MDBoxLayout:
-                orientation: "horizontal"
-                size_hint: 0.7, 0.1
-                spacing: dp(20)
+            # ---------- TREE CARD (center) ----------
+            MDCard:
+                id: tree_card
+                size_hint: 0.52, 0.72
+                pos_hint: {"center_x":0.5, "y":0.09}
+                radius: [20,]
+                elevation: 8
                 padding: dp(10)
-                pos_hint: {"x":0.05, "top":0.95}
+                md_bg_color: 0.1, 0.1, 0.1, 0.8
 
-                Widget:
-                    size_hint_x: None
-                    width: dp(20)
+                FloatLayout:
+                    # ---------- TREE IMAGE ----------
+                    FitImage:
+                        id: tree_image
+                        source: root.tree_image_source
+                        allow_stretch: True
+                        keep_ratio: True
+                        size_hint: 1, 1
+                        pos_hint: {"x":0, "y":0}
 
-                # Coins
-                MDLabel:
-                    id: coins_label
-                    text: root.coins_text
-                    font_style: "H6"
-                    size_hint_x: None
-                    #width: self.texture_size[0]
-                    color: 1, 0.9, 0, 1
+                    # ---------- LEFT ICONS ----------
+                    ImageButton:
+                        source: app.store_icon
+                        size_hint: 0.12, 0.12
+                        pos_hint: {"x": 0.02, "top": 0.95}
+                        on_release: root.open_store()
 
-                # XP
-                MDLabel:
-                    id: xp_label
-                    text: root.xp_text
-                    font_style: "H6"
-                    size_hint_x: None
-                    #width: self.texture_size[0]
-                    color: 0.5, 1, 0.5, 1
+                    ImageButton:
+                        source: app.manure_icon
+                        size_hint: 0.12, 0.12
+                        pos_hint: {"x": 0.02, "center_y": 0.5}
+                        on_release: root.use_manure()
 
-                # Spacer pushes timer right
-                Widget:
+                    ImageButton:
+                        source: app.hose_icon
+                        size_hint: 0.12, 0.12
+                        pos_hint: {"x": 0.02, "y": 0.05}
+                        on_release: root.use_hose()
 
-                # Timer (top-right)
-                MDLabel:
-                    id: timer_label
-                    text: root.timer_text
-                    font_style: "H6"
-                    bold: True
-                    size_hint_x: None
-                    #width: self.texture_size[0]
-                    halign: "right"
-                    color: 1, 0.6, 0.2, 1
+                    # ---------- RIGHT ICONS ----------
+                    ImageButton:
+                        source: app.fertilizer1_icon
+                        size_hint: 0.12, 0.12
+                        pos_hint: {"right": 0.98, "top": 0.95}
+                        on_release: root.use_fertilizer(1)
 
-            # Tutor icon (bottom-right)
+                    ImageButton:
+                        source: app.fertilizer2_icon
+                        size_hint: 0.12, 0.12
+                        pos_hint: {"right": 0.98, "center_y": 0.75}
+                        on_release: root.use_fertilizer(2)
+
+                    # ---------- XP BAR (bottom of card) ----------
+                    FloatLayout:
+                        size_hint: 1, 0.12
+                        pos_hint: {"x":0, "y":0}
+
+                        MDBoxLayout:
+                            id: xp_bar_bg
+                            size_hint: 0.9, 0.3
+                            pos_hint: {"center_x":0.5, "y":0.35}
+                            md_bg_color: 0.2, 0.2, 0.2, 1
+                            radius: [10,]
+
+                            MDBoxLayout:
+                                id: xp_bar_fill
+                                size_hint_x: 0.25  # dynamic
+                                md_bg_color: 0.5, 1, 0.5, 1
+                                radius: [10,]
+
+                        # Centered XP label
+                        MDLabel:
+                            id: xp_label
+                            text: root.xp_text
+                            halign: "center"
+                            valign: "middle"
+                            size_hint: 1, 1
+                            font_style: "H6"
+                            color: 1, 1, 1, 1
+
+            # ---------- TUTOR ICON (bottom-right) ----------
             ImageButton:
                 source: app.tutor_icon
                 size_hint: 0.08, 0.12
                 pos_hint: {"right":0.98, "y":0.05}
                 on_release: root.go_tutor()
 
-            # Dim background behind menu panel
+            # ---------- DIM BACKGROUND FOR MENU PANEL ----------
             MDBoxLayout:
                 id: slider_bg
                 size_hint: 0.7, 1
@@ -122,18 +153,18 @@
                 on_touch_down:
                     if self.opacity == 1: root.hide_menu_panel()
 
-            # Side menu panel (left-to-right, translucent gray)
+            # ---------- SIDE MENU PANEL ----------
             MDBoxLayout:
                 id: menu_slider_panel
                 orientation: "vertical"
-                size_hint: 0.7, None    # 70% of width
+                size_hint: 0.7, None
                 height: dp(300)
                 pos_hint: {"x": 0, "y": 0.05}
                 opacity: 0
                 disabled: True
                 spacing: dp(12)
                 padding: dp(15)
-                md_bg_color: 0.2, 0.2, 0.2, 0.9  # grayish translucent
+                md_bg_color: 0.2, 0.2, 0.2, 0.9
                 radius: [12,]
 
                 MDRaisedButton:

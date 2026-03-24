@@ -4,7 +4,7 @@ from kivymd.app import MDApp
 from backend.user_builder import UserBuilder
 
 
-class Path_selectionScreen(MDScreen):
+class PathSelectionScreen(MDScreen):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.learning_path = "gamer"  # default

@@ -1,4 +1,3 @@
-from kivy.lang import Builder
 from kivymd.uix.card import MDCard
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import MDFlatButton
@@ -63,7 +62,7 @@ class TopicCard(MDCard):
             icon = MDIcon(icon="lock", theme_text_color="Custom", text_color=(0.6, 0.6, 0.6, 1))
         else:
             icon = MDIcon(icon="play-circle", theme_text_color="Custom", text_color=(0.1, 0.6, 0.9, 1))
-
+        
         header.add_widget(title)
         header.add_widget(icon)
 
@@ -87,7 +86,13 @@ class TopicCard(MDCard):
             btn.bind(on_release=lambda x: callback(topic["id"]))
             self.add_widget(btn)
 
+
 class LessonScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.current_user = None
+        self.app = MDApp.get_running_app()
+
     def on_enter(self, *args):
         app = MDApp.get_running_app()
         self.current_user = app.current_user
@@ -104,17 +109,21 @@ class LessonScreen(MDScreen):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        user_data = data.get(self.current_user, {})
-        subjects = user_data.get("subjects", [])
+        subjects = data.get("subjects", [])
+        # support legacy format keyed by user id
+        if not subjects and isinstance(data, dict) and self.current_user in data:
+            subjects = data[self.current_user].get("subjects", [])
 
         for subj in subjects:
             card = SubjectCard()  # instantiate Python class
-            card.ids.title.text = f"{subj['name']} {subj['emoji']}"
-            card.ids.description.text = subj["description"]
-            card.ids.progress.value = (subj["completed"] / subj["lessons"]) * 100
+            card.ids.title.text = f"{subj.get('name', 'Unknown')} {subj.get('emoji', '')}"
+            card.ids.description.text = subj.get("description", "")
+            lessons = max(subj.get("lessons", 0), 1)
+            completed = subj.get("completed", 0)
+            card.ids.progress.value = (completed / lessons) * 100
 
             btn = MDFlatButton(text="Select ▶", size_hint_y=None, height=36, font_name="C:/Windows/Fonts/seguiemj.ttf", theme_text_color="Custom", text_color=(0, 0, 0, 1))
-            btn.bind(on_release=partial(self.select_subject, subj["id"]))
+            btn.bind(on_release=partial(self.select_subject, subj.get("id")))
             card.add_widget(btn)  # add button to the bottom of the card
 
             self.ids.lesson_content.add_widget(card)
@@ -127,52 +136,8 @@ class LessonScreen(MDScreen):
 
     def select_subject(self, subject_id, *kwargs):
         # Navigate to Topic Roadmap
-        self.manager.current = "topic_roadmap"
-        roadmap_screen = self.manager.get_screen("topic_roadmap")
+        self.app.switch_to("topic_roadmap")
+        # self.app.screen_manager is the correct manager instance (LuminaApp has no 'manager')
+        roadmap_screen = self.app.screen_manager.get_screen("topic_roadmap")
         roadmap_screen.subject_id = subject_id
         roadmap_screen.load_roadmap(subject_id)
-
-
-# -----------------------------
-# Topic Roadmap Screen
-# -----------------------------
-class TopicRoadmapScreen(MDScreen):
-    subject_id = None
-    current_user = None
-
-    def load_roadmap(self, subject_id):
-        self.ids.roadmap_container.clear_widgets()
-        app = MDApp.get_running_app()
-        self.current_user = app.current_user
-
-        # Load user progress
-        user_json = f"data/user/{self.current_user}/progress/user_progress.json"
-        with open(user_json, "r", encoding='utf-8') as f:
-            user_data = json.load(f)
-        subject_progress = next((s for s in user_data[self.current_user]["subjects"] if s["id"]==subject_id), None)
-        completed_count = subject_progress["completed"]
-
-        # Load subject topics
-        subject_json = f"data/user/{self.current_user}/subjects/course_{subject_id}.json"
-        with open(subject_json, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        topics = data["topics"]
-
-        for idx, topic in enumerate(topics):
-            if idx < completed_count:
-                status = "completed"
-            elif idx == completed_count:
-                status = "next"
-            else:
-                status = "locked"
-
-            card = TopicCard(topic, status, self.start_topic)
-            self.ids.roadmap_container.add_widget(card)
-
-    def start_topic(self, topic_id):
-        print(f"Starting topic: {topic_id}")
-        # Navigate to lesson progress screen
-        self.manager.current = "lesson_progress"
-        progress_screen = self.manager.get_screen("lesson_progress")
-        progress_screen.load_lesson(self.subject_id, topic_id)
-

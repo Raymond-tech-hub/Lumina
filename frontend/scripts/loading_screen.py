@@ -10,7 +10,6 @@ SECONDARY_KV = [
     "frontend/screens/quiz.kv",
     "frontend/screens/tasks.kv",
     "frontend/screens/profile.kv",
-    "frontend/screens/tutor.kv",
     "frontend/screens/lesson_progress.kv",
     "frontend/screens/mini_quest.kv",
     "frontend/screens/timetable.kv",

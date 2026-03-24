@@ -94,10 +94,13 @@ class LuminaApp(MDApp):
 
         # Dynamic import
         mod_name = f"frontend.scripts.{screen_name.lower()}_screen"
-        mod = __import__(mod_name, fromlist=[screen_name.capitalize() + "Screen"])
-        cls = getattr(mod, screen_name.capitalize() + "Screen")
-        screen = cls(name=screen_name)
+        mod = __import__(mod_name, fromlist=[screen_name])
 
+        # Convert snake_case to CamelCase for class name (e.g., topic_roadmap -> TopicRoadmapScreen)
+        class_name = "".join([word.capitalize() for word in screen_name.split("_")]) + "Screen"
+        cls = getattr(mod, class_name)
+
+        screen = cls(name=screen_name)
         self.cached_screens[screen_name] = screen
         self.screen_manager.add_widget(screen)
         return screen

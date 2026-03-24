@@ -21,7 +21,12 @@ class LessonProgressScreen(MDScreen):
         progress_file = f"data/user/{self.current_user}/progress/user_progress.json"
         if os.path.exists(progress_file):
             with open(progress_file, "r", encoding="utf-8") as f:
-                self.user_progress = json.load(f)
+                data = json.load(f)
+
+            if isinstance(data, dict) and self.current_user in data and isinstance(data[self.current_user], dict):
+                self.user_progress = data[self.current_user]
+            else:
+                self.user_progress = data
         else:
             self.user_progress = {}
 
@@ -32,22 +37,24 @@ class LessonProgressScreen(MDScreen):
         progress_file = f"data/user/{self.current_user}/progress/user_progress.json"
 
         # Load current progress
-        data = {"subjects": []}
+        data = {}
         if os.path.exists(progress_file):
             try:
                 with open(progress_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
-            except:
-                pass  # corrupt file → start fresh
+            except Exception:
+                data = {}
 
-        # Find or create the subject entry
-        subjects = data.setdefault("subjects", [])
-        subject = None
-        for s in subjects:
-            if s.get("id") == self.subject_id:
-                subject = s
-                break
+        subjects = []
+        if isinstance(data, dict):
+            subjects = data.get("subjects", [])
+            if not subjects and self.current_user in data and isinstance(data[self.current_user], dict):
+                subjects = data[self.current_user].get("subjects", [])
 
+        if not isinstance(subjects, list):
+            subjects = []
+
+        subject = next((s for s in subjects if s.get("id") == self.subject_id), None)
         if subject is None:
             subject = {
                 "id": self.subject_id,
@@ -55,36 +62,39 @@ class LessonProgressScreen(MDScreen):
                 "emoji": "",
                 "lessons": 0,
                 "completed": 0,
-                "description": ""
+                "description": "",
+                "completed_topic_ids": []
             }
             subjects.append(subject)
 
-        # Optional: sync real lesson count from course file (very useful)
-        if subject["lessons"] == 0:
-            course_path = f"data/user/{self.current_user}/subjects/course_{self.subject_id}.json"
-            if os.path.exists(course_path):
-                try:
-                    with open(course_path, "r", encoding="utf-8") as f:
-                        course = json.load(f)
-                    subject["lessons"] = len(course.get("topics", []))
-                    subj_info = course.get("subject", {})
-                    subject.update({
-                        "name": subj_info.get("name", subject["name"]),
-                        "emoji": subj_info.get("emoji", subject["emoji"]),
-                        "description": subj_info.get("description", subject["description"])
-                    })
-                except:
-                    pass  # silent fail
+        # Optional: sync real lesson count from course file
+        course_path = f"data/user/{self.current_user}/subjects/course_{self.subject_id}.json"
+        if os.path.exists(course_path):
+            try:
+                with open(course_path, "r", encoding="utf-8") as f:
+                    course = json.load(f)
+                subject["lessons"] = len(course.get("topics", []))
+                subj_info = course.get("subject", {})
+                subject.update({
+                    "name": subj_info.get("name", subject.get("name", "")),
+                    "emoji": subj_info.get("emoji", subject.get("emoji", "")),
+                    "description": subj_info.get("description", subject.get("description", ""))
+                })
+            except Exception:
+                pass
 
-        # Now increment completed (with safety cap)
-        current = subject.get("completed", 0)
-        max_lessons = subject.get("lessons", 999)
-        if current < max_lessons:
-            subject["completed"] = current + 1
+        # Mark topic as complete exactly once
+        completed_topic_ids = subject.setdefault("completed_topic_ids", [])
+        if self.topic_id and self.topic_id not in completed_topic_ids:
+            completed_topic_ids.append(self.topic_id)
 
-        # Save back
+        max_lessons = max(subject.get("lessons", 0), len(completed_topic_ids))
+        subject["completed"] = min(len(completed_topic_ids), max_lessons)
+
+        # Save in no-id format as requested:
+        out_data = {"subjects": subjects}
         with open(progress_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=4)
+            json.dump(out_data, f, indent=4)
 
     def load_lesson(self, subject_id, topic_id):
         app = MDApp.get_running_app()

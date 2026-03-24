@@ -1,10 +1,10 @@
 {
     "users": {
-        "1": {
+        "testuser": {
             "tree": {
-                "xp": 605,
-                "coins": 130,
-                "stage": "Mature Tree \ud83c\udf32",
+                "xp": 150,
+                "coins": 0,
+                "stage": "Sapling \ud83c\udf3f",
                 "stages": [
                     {
                         "name": "Seedling \ud83c\udf31",
@@ -34,46 +34,11 @@
                 ]
             }
         },
-        "2": {
+        "1": {
             "tree": {
-                "name": "Lumina Tree",
-                "xp": 50,
-                "coins": 20,
-                "stage": "Seedling \u00f0\u0178\u0152\u00b1",
-                "stages": [
-                    {
-                        "name": "Seedling \u00f0\u0178\u0152\u00b1",
-                        "xp_required": 0,
-                        "image": "data/user/seedling.jpeg"
-                    },
-                    {
-                        "name": "Sapling \u00f0\u0178\u0152\u00bf",
-                        "xp_required": 100,
-                        "image": "data/user/sapling.jpeg"
-                    },
-                    {
-                        "name": "Young Tree \u00f0\u0178\u0152\u00b3",
-                        "xp_required": 250,
-                        "image": "data/user/young.jpeg"
-                    },
-                    {
-                        "name": "Mature Tree \u00f0\u0178\u0152\u00b2",
-                        "xp_required": 500,
-                        "image": "data/user/tree_mature.jpeg"
-                    },
-                    {
-                        "name": "Grand Tree \u00f0\u0178\u0152\u00b4",
-                        "xp_required": 1000,
-                        "image": "data/user/grand.jpeg"
-                    }
-                ]
-            }
-        },
-        "5": {
-            "tree": {
-                "xp": 130,
-                "coins": 5,
-                "stage": "Sapling \ud83c\udf3f",
+                "xp": 20,
+                "coins": 0,
+                "stage": "Seedling \ud83c\udf31",
                 "stages": [
                     {
                         "name": "Seedling \ud83c\udf31",

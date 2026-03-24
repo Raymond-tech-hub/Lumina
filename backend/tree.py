@@ -43,28 +43,43 @@ class Tree:
 
     def load_tree(self):
         """Load tree data from JSON if it exists."""
+        uid = str(self.user_id)
         if os.path.exists(self.TREE_FILE):
-            with open(self.TREE_FILE, "r") as f:
+            with open(self.TREE_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                # adjust if your JSON has a "users" wrapper
-                users_data = data.get("users", data)  # fallback to old format
-                if self.user_id in users_data:
-                    user_data = users_data[self.user_id].get("tree", users_data[self.user_id])
-                    self.xp = user_data.get("xp", 0)
-                    self.coins = user_data.get("coins", 0)
-                    self.stage = user_data.get("stage", self.STAGES[0]["name"])
+                # support both shaped tree_data formats
+                users_data = data.get("users", data)
+                if uid in users_data:
+                    user_entry = users_data[uid]
+                    tree_data = user_entry.get("tree", user_entry) if isinstance(user_entry, dict) else {}
+                    self.xp = tree_data.get("xp", 0)
+                    self.coins = tree_data.get("coins", 0)
+                    self.stage = tree_data.get("stage", self.STAGES[0]["name"])
                     self.update_stage()  # sets current_image & level
         self.update_ui_data()  # ready for KV binding
 
 
     def save_tree(self):
+        uid = str(self.user_id)
         data = {}
         if os.path.exists(self.TREE_FILE):
-            with open(self.TREE_FILE, "r") as f:
+            with open(self.TREE_FILE, "r", encoding="utf-8") as f:
                 data = json.load(f)
+
+        # Migrate flat format to per-user wrapper if needed
+        if "users" not in data:
+            if data and any(k == "xp" for k in data):
+                # existing single user tree object
+                data = {"users": {uid: {"tree": data}}}
+            else:
+                # existing per-user dict or empty
+                users_payload = {k: v for k, v in data.items() if k != "users"}
+                data = {"users": users_payload} if users_payload else {"users": {}}
+
         if "users" not in data:
             data["users"] = {}
-        data["users"][self.user_id] = {
+
+        data["users"][uid] = {
             "tree": {
                 "xp": self.xp,
                 "coins": self.coins,
@@ -72,7 +87,13 @@ class Tree:
                 "stages": self.STAGES
             }
         }
-        with open(self.TREE_FILE, "w") as f:
+
+        # Ensure directory exists
+        parent = os.path.dirname(self.TREE_FILE)
+        if parent and not os.path.exists(parent):
+            os.makedirs(parent, exist_ok=True)
+
+        with open(self.TREE_FILE, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
 

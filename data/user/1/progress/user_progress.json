@@ -1,6 +1,5 @@
 {
-    "1": {
-        "subjects": [
+     "subjects": [
             {
                 "id": "biology",
                 "name": "Biology",
@@ -34,15 +33,4 @@
                 "description": "Matter, reactions, elements."
             }
         ]
-    },
-    "subjects": [
-        {
-            "id": "biology",
-            "name": "Biology",
-            "emoji": "\ud83c\udf3f",
-            "lessons": 3,
-            "completed": 3,
-            "description": "Plants, animals, ecosystems."
-        }
-    ]
-}
+    }
