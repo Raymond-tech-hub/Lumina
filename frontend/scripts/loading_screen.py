@@ -102,6 +102,7 @@ class LoadingScreen(MDScreen):
             self.background_music = SoundLoader.load(music_path)
             if self.background_music:
                 self.background_music.loop = True
+                self.background_music.volume = 0.2
                 self.background_music.play()
                 print(f"[AUDIO] Playing background music: {music_path}")
             else:

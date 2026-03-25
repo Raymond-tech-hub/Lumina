@@ -33,6 +33,8 @@ class LuminaApp(MDApp):
         self.graphs = []
         self.current_id = 0
         self.current_graph = None
+        # Initialize in your App class
+        self.screen_history = []
 
     def lazy_load_screen(self, screen_name):
         """Load any other screen lazily."""
@@ -106,9 +108,23 @@ class LuminaApp(MDApp):
         return screen
 
     def switch_to(self, screen_name):
-        """Switch screens using cache."""
-        self.add_screen(screen_name)
+        """Switch screens and keep history."""
+        if not self.screen_manager.has_screen(screen_name):
+            self.add_screen(screen_name)
+
+        # Save current screen before switching
+        current = self.screen_manager.current
+        if current and (not self.screen_history or self.screen_history[-1] != current):
+            self.screen_history.append(current)
+
+        # Switch
         self.screen_manager.current = screen_name
+
+    def go_back(self):
+        """Go back to previous screen, if any."""
+        if self.screen_history:
+            prev = self.screen_history.pop()
+            self.screen_manager.current = prev  
 
     def load_user_graphs(self, user_id):
         self.current_user = str(user_id)  # store current user

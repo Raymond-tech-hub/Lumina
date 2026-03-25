@@ -1,0 +1,40 @@
+{
+  "subject": {
+    "id": "biology",
+    "name": "Biology",
+    "emoji": "🌿",
+    "description": "Plants, animals, ecosystems.",
+    "class": "Form 2",
+    "syllabus": "KLB",
+    "hint_limit": 3,
+    "topics": [
+      {
+        "id": "osmosis",
+        "name": "🌊 Mission 1: Save the Dying Plant (Osmosis)",
+        "short_description": "Ever wondered why your hands wrinkle when immersed in water?\nOsmosis is involved.\nIn this chapter, you will explore osmosis.",
+        "shorter_description": "Explore why fingers wrinkle in water through osmosis.",
+        "estimated_time": "15 min",
+        "difficulty": "Medium",
+        "file_path": "data/user/<user>/subjects/biology/osmosis.txt"
+      },
+      {
+        "id": "photosynthesis",
+        "name": "🌞 Mission 2: Power the Sun Temple (Photosynthesis)",
+        "short_description": "How do plants make food from sunlight?\nDiscover the magic of photosynthesis.",
+        "shorter_description": "Learn how plants turn sunlight into food.",
+        "estimated_time": "20 min",
+        "difficulty": "Medium",
+        "file_path": "data/user/<user>/subjects/biology/photosynthesis.txt"
+      },
+      {
+        "id": "respiration",
+        "name": "🔥 Mission 3: Activate the Energy Core (Respiration)",
+        "short_description": "Why does your body release energy from food?\nLearn the secrets of cellular respiration.",
+        "shorter_description": "Understand how cells release energy from food.",
+        "estimated_time": "15 min",
+        "difficulty": "Hard",
+        "file_path": "data/user/<user>/subjects/biology/respiration.txt"
+      }
+    ]
+  }
+}

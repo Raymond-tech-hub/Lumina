@@ -36,9 +36,9 @@
         },
         "1": {
             "tree": {
-                "xp": 20,
-                "coins": 0,
-                "stage": "Seedling \ud83c\udf31",
+                "xp": 205,
+                "coins": 15,
+                "stage": "Sapling \ud83c\udf3f",
                 "stages": [
                     {
                         "name": "Seedling \ud83c\udf31",

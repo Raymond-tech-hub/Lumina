@@ -41,19 +41,82 @@
             id: middle_sector
             size_hint_y: 0.75  # 75% of screen height
 
-            # ---------- MENU ICON (top-left) ----------
-            ImageButton:
-                source: app.menu_icon
-                size_hint: 0.08, 0.12
-                pos_hint: {"x":0.02, "top":0.98}
-                on_release: root.toggle_menu_panel()
+            # ---------- TOP CONTROL BAR ----------
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, 0.12
+                pos_hint: {"top": 1}
+                padding: dp(10)
+                spacing: dp(10)
 
-            # ---------- TIMER LABEL (top-center) ----------
-            MDLabel:
-                text: root.timer_text
-                font_style: "H3"
-                halign: "center"
-                pos_hint: {"center_x": 0.5, "top": 0.95}
+                # MENU ICON
+                ImageButton:
+                    source: app.menu_icon
+                    size_hint_x: None
+                    width: dp(40)
+                    on_release: root.toggle_menu_panel()
+
+                # COINS + XP CARD
+                MDCard:
+                    size_hint_x: None
+                    width: dp(160)
+                    radius: [20]
+                    elevation: 4
+                    padding: dp(8)
+                    md_bg_color: 0.15, 0.15, 0.15, 0.9
+
+                    MDBoxLayout:
+                        orientation: "horizontal"
+                        spacing: dp(10)
+
+                        # COINS
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: dp(5)
+                            size_hint_x: None
+                            width: self.minimum_width
+
+                            MDIcon:
+                                icon: "cash"
+                                theme_text_color: "Custom"
+                                text_color: 1, 0.8, 0, 1
+
+                            MDLabel:
+                                id: coins_label
+                                text: root.coins_text
+                                font_style: "Caption"
+                                size_hint_x: None
+                                #width: self.texture_size[0]
+
+                        # XP
+                        MDBoxLayout:
+                            orientation: "horizontal"
+                            spacing: dp(5)
+                            size_hint_x: None
+                            #width: self.minimum_width
+
+                            MDIcon:
+                                icon: "star-circle"
+                                theme_text_color: "Custom"
+                                text_color: 0.5, 1, 0.5, 1
+
+                            MDLabel:
+                                id: xp_label
+                                text: root.xp_text
+                                font_style: "Caption"
+                                size_hint_x: None
+                                width: self.texture_size[0]
+
+                # SPACER → pushes timer right
+                Widget:
+
+                # TIMER (far right)
+                MDLabel:
+                    text: root.timer_text
+                    font_style: "H5"
+                    halign: "right"
+                    size_hint_x: None
+                    width: dp(80)
 
             # ---------- TREE CARD (center) ----------
             MDCard:
@@ -133,7 +196,7 @@
                             valign: "middle"
                             size_hint: 1, 1
                             font_style: "H6"
-                            color: 1, 1, 1, 1
+                            color: 0, 0, 0, 1
 
             # ---------- TUTOR ICON (bottom-right) ----------
             ImageButton:

@@ -8,6 +8,7 @@ from kivymd.uix.card import MDCard
 from kivy.clock import Clock
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.app import MDApp
 
 from backend.ChatBot.chatbot import ChatBot
 from backend.ChatBot.voice import Voice
@@ -20,13 +21,17 @@ global_msg = ''
 db="backend/ChatBot/Database/Bot/response.json"
 fact_file="backend/ChatBot/Database/Bot/OsmosisFacts.json"
 
-class TutorScreen(MDScreen):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.Chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
-        self.token_sim = TokenSimulation()
-        self.model_mode = "classic"   # classic | llm
+global_chatbot = None  # global singleton
 
+class TutorScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        global global_chatbot
+        if not global_chatbot:
+            global_chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
+        self.Chatbot = global_chatbot
+        self.token_sim = TokenSimulation()
+        self.model_mode = "classic"
     def on_enter(self):
         if not hasattr(self, "menu"):
             self.setup_model_menu()
@@ -77,8 +82,19 @@ class TutorScreen(MDScreen):
         return f"current time is: {current_time}"
 
     def go_back(self):
-        print("entering home")
-        self.manager.current = "home"
+        print("Going back to previous screen")
+        app = MDApp.get_running_app()
+
+        if not hasattr(app, "screen_manager") or not hasattr(app, "screen_history"):
+            print("[ERROR] ScreenManager or screen_history not found")
+            return
+
+        if app.screen_history:
+            prev_screen = app.screen_history.pop()
+            app.screen_manager.current = prev_screen
+        else:
+            print("[INFO] No previous screen in history, defaulting to 'home'")
+            app.screen_manager.current = "home"
 
     def add_thinking_bubble(self):
         chat_container = self.ids.chat_container

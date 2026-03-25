@@ -140,9 +140,9 @@ class HomeScreen(MDScreen):
         tree_image_widget.source = progress["current_image"]
         
         # Update XP and Coins labels
-        self.ids.xp_label.text = f"XP: {progress['xp']}"
-        self.ids.coins_label.text = f"Coins: {progress['coins']}"
-
+        self.coins_text = f"{progress['coins']}"
+        self.xp_text = f"{progress['xp']}"
+        
     def toggle_menu_panel(self):
         panel = self.ids.menu_slider_panel
         bg = self.ids.slider_bg

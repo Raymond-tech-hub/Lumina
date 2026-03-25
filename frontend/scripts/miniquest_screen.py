@@ -14,7 +14,7 @@ from kivymd.uix.screen import MDScreen
 
 from backend.tree import Tree
 
-class MiniQuestScreen(MDScreen):
+class MiniquestScreen(MDScreen):
     content_box = ObjectProperty(None)
 
     def __init__(self, subject="biology", topic_id="osmosis_101", **kwargs):
@@ -146,4 +146,4 @@ class MiniQuestApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Blue"
-        return MiniQuestScreen(subject="biology", topic_id="osmosis_101")
+        return MiniquestScreen(subject="biology", topic_id="osmosis_101")

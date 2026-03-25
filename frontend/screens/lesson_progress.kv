@@ -1,54 +1,59 @@
 <LessonProgressScreen>:
     name: "lesson_progress"
+    FloatLayout:
+        Image:
+            source: app.subject_wallpaper
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+            pos_hint: {"x": 0, "y": 0}
 
-    Image:
-        source: app.subject_wallpaper
-        allow_stretch: True
-        keep_ratio: False
-        size_hint: 1, 1
-        pos_hint: {"x": 0, "y": 0}
-
-    MDBoxLayout:
-        orientation: "vertical"
-
-        # ================= Header =================
         MDBoxLayout:
-            size_hint_y: None
-            height: "60dp"
-            padding: 10
-            md_bg_color: 0.1, 0.6, 0.9, 1
+            orientation: "vertical"
 
-            MDLabel:
-                id: lesson_title
-                text: ""
-                font_name: "C:/Windows/Fonts/seguiemj.ttf"
-                theme_text_color: "Custom"
-                text_color: 1, 1, 0.95, 1
-                halign: "center"
-                font_style: "H6"
 
-        # ================= Subtopic Progress =================
-        MDBoxLayout:
-            size_hint_y: None
-            height: "40dp"
-            padding: 10
-
-            MDLabel:
-                id: progress_label
-                text: ""
-                font_name: "C:/Windows/Fonts/seguiemj.ttf"
-                theme_text_color: "Custom"
-                text_color: 0.1, 0.6, 0.9, 1
-                halign: "center"
-
-        # ================= Scrollable Content =================
-        ScrollView:
+            # ================= Header =================
             MDBoxLayout:
+                size_hint_y: None
+                height: "60dp"
+                padding: 10
+                md_bg_color: 0.1, 0.6, 0.9, 1
+
+                MDLabel:
+                    id: lesson_title
+                    text: ""
+                    font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                    theme_text_color: "Custom"
+                    text_color: 1, 1, 0.95, 1
+                    halign: "center"
+                    font_style: "H6"
+
+            # ================= Subtopic Progress =================
+            MDBoxLayout:
+                size_hint_y: None
+                height: "40dp"
+                padding: 10
+
+                MDLabel:
+                    id: progress_label
+                    text: ""
+                    font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.6, 0.9, 1
+                    halign: "center"
+
+            # ================= Card Content =================
+            MDCard:
                 orientation: "vertical"
                 padding: 20
                 spacing: 20
-                size_hint_y: None
+                radius: [15, 15, 15, 15]
+                elevation: 10
+                size_hint: 0.9, None
                 height: self.minimum_height
+                pos_hint: {"center_x": 0.5, "top": 0.9}
+                md_bg_color: 0.95, 0.97, 1, 1
+                elevation: 12
 
                 MDLabel:
                     id: subtopic_title
@@ -68,6 +73,7 @@
 
                 MDLabel:
                     id: lesson_text
+                    markup: True
                     text: ""
                     font_name: "C:/Windows/Fonts/seguiemj.ttf"
                     font_style: "Body1"
@@ -77,21 +83,29 @@
                     size_hint_y: None
                     height: self.texture_size[1]
 
-        # ================= Navigation Footer =================
-        MDBoxLayout:
-            size_hint_y: None
-            height: "50dp"
-            padding: 10
-            spacing: 10
+            # ================= Navigation Footer =================
+            MDBoxLayout:
+                size_hint_y: None
+                height: "50dp"
+                padding: 10
+                spacing: 10
 
-            MDFlatButton:
-                text: "⬅ Back"
-                font_name: "C:/Windows/Fonts/seguiemj.ttf"
-                text_color: 1, 1, 0.95, 1
-                on_release: root.prev_subtopic()
+                MDFlatButton:
+                    text: "⬅ Back"
+                    font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                    text_color: 1, 1, 0.95, 1
+                    on_release: root.prev_subtopic()
 
-            MDRaisedButton:
-                text: "Next ▶"
-                font_name: "C:/Windows/Fonts/seguiemj.ttf"
-                md_bg_color: 0.1, 0.6, 0.9, 1
-                on_release: root.next_subtopic()
+                MDRaisedButton:
+                    id: next_btn
+                    text: "Next ▶"
+                    font_name: "C:/Windows/Fonts/seguiemj.ttf"
+                    md_bg_color: 0.1, 0.6, 0.9, 1
+                    on_release: root.next_subtopic()
+
+        # ================= AI TUTOR ICON =================
+        ImageButton:
+            source: app.tutor_icon
+            size_hint: 0.12, 0.12
+            pos_hint: {"right": 0.98, "y": 0.02}  # bottom-right, slightly above screen edge
+            on_release: root.go_tutor()  # call your tutor function

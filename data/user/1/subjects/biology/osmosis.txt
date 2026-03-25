@@ -1,0 +1,22 @@
+\new_sub_topic
+Defenition: 
+
+<h1>What is Osmosis?</h1>
+
+Osmosis is the passive movement of water molecules across a semi-permeable membrane from a region of higher water concentration to a region of lower water concentration. 
+
+This process occurs <highlight=yellow>naturally</highlight>and does not require energy because it is driven by the concentration gradient of water. 
+
+In biological systems, <highlight=blue>osmosis is essential for maintaining the balance of water within cells and tissues.</highlight> 
+For example, in plant cells, water entering the cell causes it to swell and become turgid, which helps support the plant’s structure. 
+Conversely, water leaving the cell in a hypertonic environment causes the cell to shrink, a process known as plasmolysis. 
+In animal cells, which lack a rigid cell wall, water moving into the cell can cause it to burst, while water leaving the cell causes it to shrink or crenate.
+Osmosis is also fundamental in various real-world applications, such as in kidney dialysis, food preservation using salt or sugar, and regulating water absorption in plants. 
+Overall, osmosis is a critical mechanism for the distribution of water in living organisms and plays a central role in cell survival and function.
+
+\new_sub_topic
+
+Importance of Osmosis to plants:
+
+1. Osmosis helps plants regulate tugor pressure
+
