@@ -26,8 +26,11 @@ class ChatBotScreen(MDScreen):
         self.Chatbot = ChatBot(name="lumina", response_file=db, fact_file=fact_file)
         self.token_sim = TokenSimulation()
         self.model_mode = "classic"   # classic | llm
-        Clock.schedule_once(self.setup_model_menu)
-         
+
+    def on_enter(self):
+        if not hasattr(self, "menu"):
+            self.setup_model_menu()
+
     def setup_model_menu(self, *args):
         menu_items = [
             {

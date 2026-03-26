@@ -104,14 +104,17 @@ class LessonScreen(MDScreen):
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        user_data = data.get(self.current_user, {})
-        subjects = user_data.get("subjects", [])
+        subjects = data.get("subjects", [])
+        if not subjects and isinstance(data, dict) and self.current_user in data:
+            subjects = data[self.current_user].get("subjects", [])
 
         for subj in subjects:
             card = SubjectCard()  # instantiate Python class
-            card.ids.title.text = f"{subj['name']} {subj['emoji']}"
-            card.ids.description.text = subj["description"]
-            card.ids.progress.value = (subj["completed"] / subj["lessons"]) * 100
+            card.ids.title.text = f"{subj.get('name', 'Unknown')} {subj.get('emoji', '')}"
+            card.ids.description.text = subj.get("description", "")
+            lessons = max(subj.get("lessons", 0), 1)
+            completed = subj.get("completed", 0)
+            card.ids.progress.value = (completed / lessons) * 100
 
             btn = MDFlatButton(text="Select ▶", size_hint_y=None, height=36, font_name="C:/Windows/Fonts/seguiemj.ttf", theme_text_color="Custom", text_color=(0, 0, 0, 1))
             btn.bind(on_release=partial(self.select_subject, subj["id"]))
@@ -149,8 +152,13 @@ class TopicRoadmapScreen(MDScreen):
         user_json = f"data/user/{self.current_user}/progress/user_progress.json"
         with open(user_json, "r", encoding='utf-8') as f:
             user_data = json.load(f)
-        subject_progress = next((s for s in user_data[self.current_user]["subjects"] if s["id"]==subject_id), None)
-        completed_count = subject_progress["completed"]
+
+        subjects = user_data.get("subjects", [])
+        if not subjects and isinstance(user_data, dict) and self.current_user in user_data:
+            subjects = user_data[self.current_user].get("subjects", [])
+
+        subject_progress = next((s for s in subjects if s.get("id") == subject_id), None)
+        completed_count = subject_progress.get("completed", 0) if subject_progress else 0
 
         # Load subject topics
         subject_json = f"data/user/{self.current_user}/subjects/course_{subject_id}.json"
